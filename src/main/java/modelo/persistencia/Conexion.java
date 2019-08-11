@@ -1,14 +1,18 @@
 package modelo.persistencia;
+
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
+import javax.swing.*;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
-/** ************************************************************************************************
+/**************************************************************************************************
  * principal.Programa:      Sistema de Administracion Papeleria la Montaña
  * Autor:         Jose Miguel Quiroz Benitez
  * Fecha:         04-08-2019
- * Descripci坦n:   Crea una conexion al gestor de base de datos MYSQL
+ * Descripción:   Crea una conexion al gestor de base de datos MYSQL
  ************************************************************************************************* */
 
 /**
@@ -32,23 +36,39 @@ public class Conexion {
    * contrase単a de la base de datos que se encuentra en el atributo password. El constructor crea
    * una "copia" que es asignada al atributo con.
    */
-  public static Connection getConexion() {
-    if(conexion == null){
-      try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+  static Connection getConexion() {
+    try {
+      if (conexion == null || conexion.isClosed()) {
         try {
+          Class.forName("com.mysql.cj.jdbc.Driver");
           conexion = DriverManager.getConnection(url, username, password);
+        } catch (CommunicationsException ex) {
+          JOptionPane.showMessageDialog(null, "Ocurrio un error en la base de datos, estamos" +
+                  " tratando de resolverlo, intenta nuevamente");
+          try {
+            String cmd = "service mysql start"; //Comando de apagado en windows
+            Runtime.getRuntime().exec(cmd);
+            return null;
+          } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+          }
         } catch (SQLException mysqlError) {
           JOptionPane.showMessageDialog(null, "Error de la base de datos");
           mysqlError.printStackTrace();
+          return null;
+        } catch (ClassNotFoundException claseNoEncontrada) {
+          JOptionPane.showMessageDialog(null, "Error de la base de datos");
+          claseNoEncontrada.printStackTrace();
+          return null;
+        } catch (Exception excepcionGeneral) {
+          JOptionPane.showMessageDialog(null, "Error de la base de datos");
+          excepcionGeneral.printStackTrace();
+          return null;
         }
-      } catch (ClassNotFoundException claseNoEncontrada) {
-        JOptionPane.showMessageDialog(null, "Error de la base de datos");
-        claseNoEncontrada.printStackTrace();
-      } catch (Exception excepcionGeneral) {
-        JOptionPane.showMessageDialog(null, "Error de la base de datos");
-        excepcionGeneral.printStackTrace();
       }
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Algo salio mal contacte al administrador del sistema");
+      ex.printStackTrace();
     }
     return conexion;
   }

@@ -2,20 +2,21 @@ package modelo;
 
 public class Articulo {
     private int codigo;
-    private String codigoBarras;
+    private String codigoBarras = "";
     private String nombre;
+    private String unidad;
     private int cantidad;
-    private int piezasParaMayoreo;
-    private double gananciaMayoreo;
-    private double gananciaPublico;
-    private double precioVenta;
-    private double precioMayoreo;
-    private double precioCompra;
+    private int piezasParaMayoreo = -1;
+    private double gananciaMayoreo = -1;
+    private double gananciaPublico = -1;
+    private double precioVenta = -1;
+    private double precioMayoreo = -1;
+    private double precioCompra = -1;
     private boolean estado;
 
     public Articulo(int codigo, String codigoBarras, String nombre, int cantidad, int piezasParaMayoreo,
                     double gananciaMayoreo, double gananciaPublico, double precioVenta, double precioMayoreo,
-                    double precioCompra, boolean estado) {
+                    double precioCompra, boolean estado, String unidad) {
         this.codigo = codigo;
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
@@ -27,6 +28,7 @@ public class Articulo {
         this.precioMayoreo = precioMayoreo;
         this.precioCompra = precioCompra;
         this.estado = estado;
+        this.unidad = unidad;
     }
 
     public Articulo() {
@@ -34,7 +36,7 @@ public class Articulo {
 
     public Articulo(String codigoBarras, String nombre, int cantidad, int piezasParaMayoreo,
                     double gananciaMayoreo, double gananciaPublico, double precioVenta, double precioMayoreo,
-                    double precioCompra, boolean estado) {
+                    double precioCompra, boolean estado, String unidad) {
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -45,9 +47,11 @@ public class Articulo {
         this.precioMayoreo = precioMayoreo;
         this.precioCompra = precioCompra;
         this.estado = estado;
+        this.unidad = unidad;
     }
 
-    public Articulo(String codigoBarras, String nombre, int cantidad, double gananciaPublico, double precioVenta, double precioCompra, boolean estado) {
+    public Articulo(String codigoBarras, String nombre, int cantidad, double gananciaPublico, double precioVenta,
+                    double precioCompra, boolean estado, String unidad) {
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -55,6 +59,7 @@ public class Articulo {
         this.precioVenta = precioVenta;
         this.precioCompra = precioCompra;
         this.estado = estado;
+        this.unidad = unidad;
     }
 
     public int getCodigo() {
@@ -143,5 +148,13 @@ public class Articulo {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 }

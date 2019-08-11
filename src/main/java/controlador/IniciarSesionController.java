@@ -12,11 +12,11 @@ import modelo.persistencia.UsuarioDAO;
 import modelo.persistencia.Usuarios;
 import principal.Programa;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class IniciarSesionController implements Initializable {
-  private Usuario usuario = null;
 
   private Programa ventanaPrincipal = null;
 
@@ -72,8 +72,7 @@ public class IniciarSesionController implements Initializable {
    */
   private Usuario logearse(String usuario, String contrasena){
     UsuarioDAO persistenciaUsuario = new Usuarios();
-    Usuario usuarioLogeado = persistenciaUsuario.logearse(usuario,contrasena);
-    return usuarioLogeado;
+    return persistenciaUsuario.logearse(usuario, contrasena);
   }
 
   /**
@@ -86,13 +85,29 @@ public class IniciarSesionController implements Initializable {
     if(verificarCamposLlenos(username,contrasena)){
       Usuario usuarioLogeo = logearse(username,contrasena);
       if(usuarioLogeo != null){
-        this.usuario = usuarioLogeo;
         lMensaje.setText("¡Logeado exitosamente!");
         cambiarTextoColor(lMensaje,"#009900");
+        accederSistema(usuarioLogeo);
       }else{
         lMensaje.setText("¡Credenciales invalidas!");
         cambiarTextoColor(lMensaje,"#FF0000");
       }
+    }
+  }
+
+  /**
+   * Cambia la vista a la vista principal del sistema
+   *
+   * @param usuario El usuario que se logeo correctamente
+   */
+  private void accederSistema(Usuario usuario) {
+    try {
+      if (ventanaPrincipal != null) {
+        ventanaPrincipal.ventanaPrincipal(usuario);
+      }
+    } catch (IOException ex) {
+      System.out.println("IniciarSesionController-IOException: accederSistema");
+      ex.printStackTrace();
     }
   }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="365.0" maxWidth="670.0" minHeight="365.0" minWidth="670.0"
+      prefHeight="365.0"
+      prefWidth="670.0" style="-fx-border-color: #61B2C5; -fx-border-width: 5;"
+      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controlador.VerDetallesArticuloCajeroController">
+    <JFXTextField fx:id="tfCodigo" labelFloat="true" layoutX="32.0" layoutY="41.0" onKeyReleased="#buscarProductoCodigo"
+                  prefHeight="36.0" prefWidth="130.0" promptText="Codigo" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfCodigoBarras" labelFloat="true" layoutX="206.0" layoutY="41.0"
+                  onKeyReleased="#buscarProductoCodigoBarras" prefHeight="36.0" prefWidth="243.0"
+                  promptText="Codigo de barras" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfNombre" editable="false" labelFloat="true" layoutX="32.0" layoutY="125.0" prefHeight="36.0"
+                  prefWidth="414.0" promptText="Nombre" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfCantidad" editable="false" labelFloat="true" layoutX="465.0" layoutY="125.0"
+                  prefHeight="36.0"
+                  prefWidth="163.0" promptText="Cantidad" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfPrecioPublico" editable="false" labelFloat="true" layoutX="32.0" layoutY="213.0"
+                  promptText="Precio publico" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfPrecioMayoreo" editable="false" labelFloat="true" layoutX="256.0" layoutY="213.0"
+                  promptText="Precio mayoreo" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXTextField fx:id="tfPzasMayoreo" editable="false" labelFloat="true" layoutX="479.0" layoutY="212.0"
+                  prefHeight="36.0" prefWidth="169.0" promptText="Pzas. Mayoreo" unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXButton fx:id="btnCerrar" layoutX="552.0" layoutY="296.0" onAction="#cerrarVentana"
+               style="-fx-background-color: #047680;" text="Cerrar" textFill="WHITE">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </JFXButton>
+    <JFXTextField fx:id="tfUnidad" editable="false" labelFloat="true" layoutX="35.0" layoutY="294.0" promptText="Unidad"
+                  unFocusColor="#61b2c5">
+        <font>
+            <Font size="17.0"/>
+        </font>
+    </JFXTextField>
+    <JFXButton fx:id="btnLimpiar" layoutX="269.0" layoutY="296.0" onAction="#limpiarCampos"
+               style="-fx-background-color: #047680;" text="Limpiar" textFill="WHITE">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </JFXButton>
+</Pane>

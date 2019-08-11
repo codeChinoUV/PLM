@@ -1,51 +1,131 @@
 package principal;
 
-import controlador.IniciarSesionController;
-import javafx.scene.layout.Pane;
-import modelo.Articulo;
-import modelo.Persona;
-import modelo.Usuario;
-import modelo.persistencia.Articulos;
-import modelo.persistencia.UsuarioDAO;
-import modelo.persistencia.Usuarios;
-
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import controlador.*;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import java.util.List;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import modelo.Usuario;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Programa extends Application{
-    private final String RUTA_LOGO = "@.." + File.separator + "img" + File.separator+ "logo.png";
     private Stage stagePrincipal;
     private Pane rootPane;
+    private Usuario usuarioLogeado = null;
 
-    public void ventanaInicioSesion() throws IOException{
+
+    /**
+     * Muestra en las etiquetas de usuario el nombre y apellido del usuario y la fecha
+     *
+     * @param usuario El usuario logeado
+     */
+    public void mostrarInformacionPrincipal(Usuario usuario, Label lUsuario, Label lFecha) {
+        if (usuario != null) {
+            lUsuario.setText(usuario.getPersona().getNombre() + " " + usuario.getPersona().getApellidos());
+            lFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        }
+    }
+
+    /**
+     * Cambia la vista a Inicio de sesion
+     *
+     * @throws IOException Una excepcion si la ventana no se encuentra
+     */
+    private void ventanaInicioSesion() throws IOException {
         FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/InicioSesion.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Iniciar sesion");
+        stagePrincipal.setTitle("Papeleria la montaña-Iniciar sesion");
         stagePrincipal.setScene(scene);
         IniciarSesionController controller = loader.getController();
         controller.setVentanaPrincipal(this);
         stagePrincipal.show();
     }
-    public static void main(String[] args){
+
+    /**
+     * Cambia la vista a MenuPrincipal
+     *
+     * @param usuarioLogeado El usuario que se logeo en el login
+     * @throws IOException Una excepcion si no se encuentra el archivo de la vista
+     */
+    public void ventanaPrincipal(Usuario usuarioLogeado) throws IOException {
+        this.usuarioLogeado = usuarioLogeado;
+        System.out.println("Recibio el usuario " + usuarioLogeado.getUsuario());
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/Principal.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña-Principal");
+        PrincipalController controller = loader.getController();
+        controller.setVentanaPrincipal(this);
+        controller.setUsuario(this.usuarioLogeado);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
+
+    /**
+     * Cambia la vista a vistaMenuVentas
+     *
+     * @throws IOException Una excepcion si la vista no se encuentra
+     */
+    public void vistaMenuVentas() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/MenuVentas.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña-Ventas");
+        MenuVentasController controller = loader.getController();
+        controller.setVentanaPrincipal(this);
+        controller.setUsuario(this.usuarioLogeado);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
+
+    /**
+     * Cambia la vista a MenuArticulos
+     *
+     * @throws IOException Una excepcion si la vista no se encuentra
+     */
+    public void vistaMenuArticulos() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/MenuArticulos.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña-Articulos");
+        MenuArticulosController controller = loader.getController();
+        controller.setVentanaPrincipal(this);
+        controller.setUsuario(this.usuarioLogeado);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
+
+    /**
+     * Cambia la vista a ListarArticulos
+     *
+     * @throws IOException Una excepcion si la vista no se encuentra
+     */
+    public void vistaListarArticulos() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/ListarArticulos.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña-Articulos-Listar");
+        ListarArticulosController controller = loader.getController();
+        controller.setVentanaPrincipal(this);
+        controller.setUsuario(this.usuarioLogeado);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
+
+    public static void main(String[] args) {
         launch(args);
     }
 
+
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.stagePrincipal = stage;
         stagePrincipal.setMaximized(true);
         stagePrincipal.setResizable(false);

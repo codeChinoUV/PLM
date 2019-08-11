@@ -5,8 +5,15 @@ import modelo.Articulo;
 import java.util.List;
 
 public interface ArticulosDAO {
-  public List<Articulo> getArticulos();
-  public List<Articulo> buscarArticulos(String nombre);
-  public boolean nuevoArticulo(Articulo articulo);
-  public boolean editarArticulo(int codigo, Articulo articulo);
+  List<Articulo> getArticulos();
+
+  List<Articulo> buscarArticulos(String nombre);
+
+  Articulo recuperarArticulo(String codigoBarras);
+
+  Articulo recuperarArticulo(int codigo);
+
+  boolean nuevoArticulo(Articulo articulo);
+
+  boolean editarArticulo(int codigo, Articulo articulo);
 }
