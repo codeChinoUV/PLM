@@ -7,54 +7,54 @@ public class Articulo {
     private int cantidad;
     private int piezasParaMayoreo;
     private double gananciaMayoreo;
-    private double gananciaPublico;
+    private double ganancia;
     private double precioVenta;
     private double precioMayoreo;
     private double precioCompra;
-    private boolean estado;
+    private boolean estadoBorrado;
 
     public Articulo(int codigo, String codigoBarras, String nombre, int cantidad, int piezasParaMayoreo,
-                    double gananciaMayoreo, double gananciaPublico, double precioVenta, double precioMayoreo,
-                    double precioCompra, boolean estado) {
+                    double gananciaMayoreo, double ganancia, double precioVenta, double precioMayoreo,
+                    double precioCompra, boolean estadoBorrado) {
         this.codigo = codigo;
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.piezasParaMayoreo = piezasParaMayoreo;
         this.gananciaMayoreo = gananciaMayoreo;
-        this.gananciaPublico = gananciaPublico;
+        this.ganancia = ganancia;
         this.precioVenta = precioVenta;
         this.precioMayoreo = precioMayoreo;
         this.precioCompra = precioCompra;
-        this.estado = estado;
+        this.estadoBorrado = estadoBorrado;
     }
 
     public Articulo() {
     }
 
     public Articulo(String codigoBarras, String nombre, int cantidad, int piezasParaMayoreo,
-                    double gananciaMayoreo, double gananciaPublico, double precioVenta, double precioMayoreo,
-                    double precioCompra, boolean estado) {
+                    double gananciaMayoreo, double ganancia, double precioVenta, double precioMayoreo,
+                    double precioCompra, boolean estadoBorrado) {
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.piezasParaMayoreo = piezasParaMayoreo;
         this.gananciaMayoreo = gananciaMayoreo;
-        this.gananciaPublico = gananciaPublico;
+        this.ganancia = ganancia;
         this.precioVenta = precioVenta;
         this.precioMayoreo = precioMayoreo;
         this.precioCompra = precioCompra;
-        this.estado = estado;
+        this.estadoBorrado = estadoBorrado;
     }
 
-    public Articulo(String codigoBarras, String nombre, int cantidad, double gananciaPublico, double precioVenta, double precioCompra, boolean estado) {
+    public Articulo(String codigoBarras, String nombre, int cantidad, double ganancia, double precioVenta, double precioCompra, boolean estadoBorrado) {
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.gananciaPublico = gananciaPublico;
+        this.ganancia = ganancia;
         this.precioVenta = precioVenta;
         this.precioCompra = precioCompra;
-        this.estado = estado;
+        this.estadoBorrado = estadoBorrado;
     }
 
     public int getCodigo() {
@@ -105,12 +105,12 @@ public class Articulo {
         this.gananciaMayoreo = gananciaMayoreo;
     }
 
-    public double getGananciaPublico() {
-        return gananciaPublico;
+    public double getGanancia() {
+        return ganancia;
     }
 
-    public void setGananciaPublico(double gananciaPublico) {
-        this.gananciaPublico = gananciaPublico;
+    public void setGanancia(double ganancia) {
+        this.ganancia = ganancia;
     }
 
     public double getPrecioVenta() {
@@ -137,11 +137,11 @@ public class Articulo {
         this.precioCompra = precioCompra;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isEstadoBorrado() {
+        return estadoBorrado;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setEstadoBorrado(boolean estadoBorrado) {
+        this.estadoBorrado = estadoBorrado;
     }
 }

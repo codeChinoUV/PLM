@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Articulos implements ArticulosDAO {
 
-  private final String CONSULTA_TODOS_LOS_ARTICULOS = "SELECT * FROM articulos";
-  private final String CONSULTA_BUSCAR_ARTICULOS = "SELECT * FROM articulos WHERE nombre LIKE ";
-  private final String AGREGAR_ARTICULO = "INSERT INTO articulo(codigoDeBarras, nombre, cantidad, piezasParaMayoreo, " +
-      "gananciaMayoreo, gananciaPublico, precioVenta, precioMayoreo, precioCompra, estado) VALUES(";
-  private final String EDITAR_ARTICULO = "UPDATE articulos SET codigoDeBarras=";
+  private final String CONSULTA_TODOS_LOS_ARTICULOS = "SELECT * FROM articulo";
+  private final String CONSULTA_BUSCAR_ARTICULOS = "SELECT * FROM articulo WHERE nombre LIKE ";
+  private final String AGREGAR_ARTICULO = "INSERT INTO articulo(codigo_barras, nombre, cantidad, piezas_mayoreo, " +
+      "ganancia_mayoreo, ganancia, precio_venta, precio_mayoreo, precio_compra, estado_borrado) VALUES(";
+  private final String EDITAR_ARTICULO = "UPDATE articulo SET codigoDeBarras=";
 
   private Articulo recuperarArticulo(ResultSet resultadosDeConsulta) throws SQLException {
     Articulo articulo = null;
@@ -39,8 +39,8 @@ public class Articulos implements ArticulosDAO {
   public List<Articulo> getArticulos(){
     List<Articulo> articulos = new ArrayList<>();
     Connection conexion = Conexion.getConexion();
-    Statement consulta = null;
-    ResultSet resultados = null;
+    Statement consulta;
+    ResultSet resultados;
     try{
       consulta = conexion.createStatement();
       resultados = consulta.executeQuery(CONSULTA_TODOS_LOS_ARTICULOS);
@@ -63,8 +63,8 @@ public class Articulos implements ArticulosDAO {
   public List<Articulo> buscarArticulos(String nombre){
     List<Articulo> articulos = new ArrayList<>();
     Connection conexion = Conexion.getConexion();
-    Statement consulta = null;
-    ResultSet resultados = null;
+    Statement consulta;
+    ResultSet resultados;
     String query = CONSULTA_BUSCAR_ARTICULOS + "''" + nombre + "';'";
     try{
       consulta = conexion.createStatement();
@@ -89,10 +89,10 @@ public class Articulos implements ArticulosDAO {
     if (articulo != null) {
       String query = AGREGAR_ARTICULO + "'" + articulo.getCodigoBarras() + "','" + articulo.getNombre() + "',"
           + articulo.getCantidad() + "," + articulo.getPiezasParaMayoreo() + "," + articulo.getGananciaMayoreo()
-          + "," + articulo.getGananciaPublico() + "," + articulo.getPrecioVenta() + "," + articulo.getPrecioMayoreo()
-          + "," + articulo.getPrecioCompra() + "," + articulo.isEstado() + ");";
+          + "," + articulo.getGanancia() + "," + articulo.getPrecioVenta() + "," + articulo.getPrecioMayoreo()
+          + "," + articulo.getPrecioCompra() + "," + articulo.isEstadoBorrado() + ");";
       Connection conexion = Conexion.getConexion();
-      Statement consulta = null;
+      Statement consulta;
       try {
         consulta = conexion.createStatement();
         return consulta.execute(query);
@@ -109,13 +109,13 @@ public class Articulos implements ArticulosDAO {
   public boolean editarArticulo(int codigo, Articulo articulo){
     if (codigo < 0 && articulo != null){
       String query =  EDITAR_ARTICULO + "'"+ articulo.getCodigoBarras() + "', nombre='" + articulo.getNombre()
-          + "', cantidad=" + articulo.getCantidad() + ", piezasParaMayoreo=" + articulo.getPiezasParaMayoreo()
-          + ", gananciaMayoreo=" + articulo.getGananciaMayoreo() + ", gananciaPublico=" + articulo.getGananciaPublico()
-          + ", precioVenta=" + articulo.getPrecioVenta() + ", precioMayoreo=" + articulo.getPrecioMayoreo()
-          + ", precioCompra=" + articulo.getPrecioCompra() + ", estado=" + articulo.isEstado() + " WHERE codigo="
+          + "', cantidad=" + articulo.getCantidad() + ", piezas_mayoreo=" + articulo.getPiezasParaMayoreo()
+          + ", ganancia_mayoreo=" + articulo.getGananciaMayoreo() + ", ganancia=" + articulo.getGanancia()
+          + ", precio_venta=" + articulo.getPrecioVenta() + ", precio_mayoreo=" + articulo.getPrecioMayoreo()
+          + ", precio_compra=" + articulo.getPrecioCompra() + ", estado_borrado=" + articulo.isEstadoBorrado() + " WHERE codigo="
           + codigo + ";";
       Connection conexion = Conexion.getConexion();
-      Statement consulta = null;
+      Statement consulta;
       try{
         consulta = conexion.createStatement();
         return consulta.execute(query);
@@ -128,7 +128,5 @@ public class Articulos implements ArticulosDAO {
       return false;
     }
   }
-
-
 
 }

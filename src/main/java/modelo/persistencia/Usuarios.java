@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuarios implements UsuarioDAO{
-  private final String CONSULTA_PERSONA_ESPECIFICA = "SELECT * FROM personas WHERE idPersona = ";
-  private final String CONSULTA_TODOS_USUARIOS = "SELECT * FROM usuarios;";
-  private final String CONSULTA_LOGEO = "SELECT * FROM usuarios WHERE usuario=";
+  private final String CONSULTA_PERSONA_ESPECIFICA = "SELECT * FROM persona WHERE id_persona = ";
+  private final String CONSULTA_TODOS_USUARIOS = "SELECT * FROM usuario;";
+  private final String CONSULTA_LOGEO = "SELECT * FROM usuario WHERE usuario=";
   private final String CONSULTA_INICIA_TRANSACCION = "BEGIN;";
-  private final String CONSULTA_NUEVA_PERSONA = "INSERT INTO personas(nombre,apellidos,direccion, telefono) VALUES(";
-  private final String CONSULTA_NUEVO_USUARIO = "INSERT INTO usuarios(usuario,contrasena,tipo,activo,idPersona) VALUES(";
-  private final String CONSULTA_ULTIMO_ID_PERSONA = "SELECT MAX(idPersona) as 'ultima' from personas;";
+  private final String CONSULTA_NUEVA_PERSONA = "INSERT INTO persona(nombre,apellidos,direccion, telefono) VALUES(";
+  private final String CONSULTA_NUEVO_USUARIO = "INSERT INTO usuario(usuario,contrasena,tipo_usuario,activo,id_persona) VALUES(";
+  private final String CONSULTA_ULTIMO_ID_PERSONA = "SELECT MAX(id_persona) as 'ultima' from personas;";
   private final String CONSULTA_TERMINAR_TRANSACCION = "COMMIT";
 
   private Usuario recuperarUsuarioDeResultado(ResultSet resultadosDeConsulta) throws SQLException {
     if (resultadosDeConsulta != null){
       String nombreUsuario = resultadosDeConsulta.getString("usuario");
-      String tipo = resultadosDeConsulta.getString("tipo");
+      String tipo = resultadosDeConsulta.getString("tipo_usuario");
       boolean activo = resultadosDeConsulta.getBoolean("activo");
       Persona persona = new Persona();
-      persona.setId(resultadosDeConsulta.getInt("idPersona"));
+      persona.setId(resultadosDeConsulta.getInt("id_persona"));
       persona = getPersona(persona);
       if(persona != null){
         Usuario usuario = new Usuario(nombreUsuario,tipo,persona,activo);

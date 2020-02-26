@@ -20,10 +20,10 @@ public class Conexion {
 
   private static Connection conexion;
   private static String host = "localhost";
-  private static String db = "PLM";
-  private static String username = "miguel";
-  private static String password = "joseMiguel13";
-  private static String url = "jdbc:mysql://" + host + "/" + db + "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City";
+  private static String db = "mydb";
+  private static String username = "chino";
+  private static String password = "joseMiguel13129899";
+  private static String url = "jdbc:mysql://" + host + "/" + db + "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City&security?useSSL=false";
 
 
   /**
