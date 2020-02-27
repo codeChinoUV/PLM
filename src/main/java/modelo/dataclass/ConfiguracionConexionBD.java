@@ -7,7 +7,13 @@ public class ConfiguracionConexionBD {
     private String db;
     private String configuracionesExtra;
 
-    public ConfiguracionConexionBD(){}
+    public ConfiguracionConexionBD(){
+        this.host = "localhost";
+        this.usuario = "chino";
+        this.contrasena = "joseMiguel13129899";
+        this.db = "mydb";
+        this.configuracionesExtra = "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City&security?useSSL=false";
+    }
 
     public ConfiguracionConexionBD(String usuario, String contrasena, String host,
                                    String db, String configuracionesExtra){
@@ -23,9 +29,8 @@ public class ConfiguracionConexionBD {
      * @return El URL de conexion de la BD
      */
     public String getURl(){
-        String url = "jdbc:mysql://" + host + "/" + db
+        return "jdbc:mysql://" + host + "/" + db
                 + configuracionesExtra;
-        return url;
     }
 
     public String getContrasena() {
