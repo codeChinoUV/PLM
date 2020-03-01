@@ -83,7 +83,7 @@ public class Usuarios implements UsuarioDAO{
   /**
    * Registra un nuevo usuario en la base de datos
    * @param usuario El nuevo usuario que se registrara
-   * @return El Usuario que se registrara
+   * @return El Usuario que se registra
    * @throws SQLException Una Excepcion que indica que ocurrio un error al momento de ejecutar la consulta
    * @throws IOException Una Excepcion que indica que ocurrio un error al momento de leer el archivo de configuracion
    * @throws ClassNotFoundException Una Excepcion que indica que ocurrio un error al momento de buscar la libreria
@@ -95,6 +95,7 @@ public class Usuarios implements UsuarioDAO{
     usuario.setPersona(registrarPersona(usuario.getPersona(), conexion));
     String REGISTRO_USUARIO = "INSERT INTO usuario(usuario,contrasena,tipo_usuario,activo,persona_id_persona)" +
         " VALUES(?,?,?,?,?);";
+    Statement consultaFinTransaccion = conexion.createStatement();
     PreparedStatement consulta = conexion.prepareStatement(REGISTRO_USUARIO);
     consulta.setString(1,usuario.getUsuario());
     consulta.setString(2,Encriptacion.toSHA256(usuario.getContrasena()));
@@ -102,9 +103,9 @@ public class Usuarios implements UsuarioDAO{
     consulta.setBoolean(4,usuario.isActivo());
     consulta.setInt(5, usuario.getPersona().getId());
     if(usuario.getPersona() != null){
-        consulta.executeQuery();
+        consulta.executeUpdate();
       String CONSULTA_TERMINAR_TRANSACCION = "COMMIT";
-      consulta.execute(CONSULTA_TERMINAR_TRANSACCION);
+      consultaFinTransaccion.executeUpdate(CONSULTA_TERMINAR_TRANSACCION);
         conexion.close();
         usuarioARegistrar = usuario;
     }
@@ -169,14 +170,15 @@ public class Usuarios implements UsuarioDAO{
       if(persona != null){
         String REGISTRO_PERSONA = "INSERT INTO persona(nombre,apellidos,direccion, telefono) VALUES(?,?,?,?);";
         PreparedStatement consulta = conexion.prepareStatement(REGISTRO_PERSONA);
+        Statement consultaInicioTransaccion = conexion.createStatement();
         consulta.setString(1, persona.getNombre());
         consulta.setString(2, persona.getApellidos());
         consulta.setString(3, persona.getDireccion());
         consulta.setString(4, persona.getTelefono());
         String CONSULTA_INICIA_TRANSACCION = "BEGIN;";
-        consulta.execute(CONSULTA_INICIA_TRANSACCION);
-        consulta.executeQuery();
-        String CONSULTA_ULTIMO_ID_PERSONA = "SELECT MAX(id_persona) as 'ultima' from personas;";
+        consultaInicioTransaccion.executeUpdate(CONSULTA_INICIA_TRANSACCION);
+        consulta.executeUpdate();
+        String CONSULTA_ULTIMO_ID_PERSONA = "SELECT MAX(id_persona) as 'ultima' from persona;";
         ResultSet resultados = consulta.executeQuery(CONSULTA_ULTIMO_ID_PERSONA);
         int id =-1;
         while (resultados.next()){

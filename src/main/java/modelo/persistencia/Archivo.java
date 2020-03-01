@@ -110,6 +110,7 @@ public class Archivo implements ArchivoDAO{
         for (String linea: lineasDeLaConfiguracion) {
             String[] lineaDeConfiguracion = linea.split("=");
             if(lineaDeConfiguracion.length == 2 ){
+                System.out.println(lineaDeConfiguracion[0]+":"+lineaDeConfiguracion[1]);
                 switch (lineaDeConfiguracion[0]){
                     case "usuario":
                         configuracion.setUsuario(lineaDeConfiguracion[1]);

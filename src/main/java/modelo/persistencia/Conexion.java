@@ -1,6 +1,7 @@
 package modelo.persistencia;
 import modelo.dataclass.ConfiguracionConexionBD;
 
+import javax.net.ssl.SSLException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +14,8 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-  private static ArchivoDAO gestorDeArchivos;
   private static Connection conexion;
+  private static ConfiguracionConexionBD configuracionConexionBD;
 
   private Conexion(){
   }
@@ -23,13 +24,16 @@ public class Conexion {
    * Crea una instancia de la conexion a la base de datos
    */
   public static Connection getConexion() throws IOException,SQLException,ClassNotFoundException {
-    gestorDeArchivos = new Archivo();
-    if(conexion == null) {
+    if(configuracionConexionBD == null){
+      ArchivoDAO gestorDeArchivos = new Archivo();
+      configuracionConexionBD = gestorDeArchivos.getConfiguracionDB();
+    }
+    if(conexion == null || conexion.isClosed()) {
       Class.forName("com.mysql.cj.jdbc.Driver");
       ConfiguracionConexionBD configuracionDeConexion;
-      configuracionDeConexion = gestorDeArchivos.getConfiguracionDB();
-      conexion = DriverManager.getConnection(configuracionDeConexion.getURl(), configuracionDeConexion.getUsuario(),
-              configuracionDeConexion.getContrasena());
+
+      conexion = DriverManager.getConnection(configuracionConexionBD.getURl(), configuracionConexionBD.getUsuario(),
+          configuracionConexionBD.getContrasena());
     }
     return conexion;
   }
@@ -41,7 +45,9 @@ public class Conexion {
   public void close() {
     if(conexion != null){
       try {
-        conexion.close();
+        if(!conexion.isClosed()){
+          conexion.close();
+        }
       } catch (SQLException e) {
         System.err.println("Error: " + e.getMessage() + "\n" + e.getErrorCode());
       }

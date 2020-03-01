@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="732.0" prefWidth="1366.0" style="-fx-background-color: #6EA6F3;"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controlador.AdministrarInventarioController">
+    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <top>
+            <HBox prefHeight="122.0" prefWidth="1366.0" style="-fx-background-color: #1E5DBA; -fx-border-color: white;"
+                  BorderPane.alignment="CENTER">
+                <ImageView fitHeight="111.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../img/logo.png"/>
+                    <HBox.margin>
+                        <Insets top="5.0"/>
+                    </HBox.margin>
+                </ImageView>
+                <Label prefHeight="110.0" prefWidth="419.0" text="Administrar inventario" textAlignment="CENTER"
+                       textFill="WHITE">
+                    <font>
+                        <Font name="System Bold Italic" size="36.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="20.0"/>
+                    </padding>
+                    <HBox.margin>
+                        <Insets top="5.0"/>
+                    </HBox.margin>
+                </Label>
+                <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP"
+                           mnemonicParsing="false" prefHeight="104.0" prefWidth="135.0"
+                           style="-fx-background-color: #F14634;" text="Regresar" textAlignment="CENTER"
+                           textFill="WHITE">
+                    <HBox.margin>
+                        <Insets left="680.0" top="5.0"/>
+                    </HBox.margin>
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="74.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../img/regresar.png"/>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+            </HBox>
+        </top>
+        <left>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        </left>
+        <right>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        </right>
+        <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                    <Label prefHeight="58.0" prefWidth="78.0" text="Buscar:" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0"/>
+                        </font>
+                    </Label>
+                    <JFXTextField focusColor="#f0741e" prefHeight="21.0" prefWidth="400.0"
+                                  unFocusColor="#1e5dba">
+                        <font>
+                            <Font size="20.0"/>
+                        </font>
+                    </JFXTextField>
+                    <JFXButton buttonType="RAISED" mnemonicParsing="false" prefHeight="39.0" prefWidth="104.0"
+                               style="-fx-background-color: #F0741E;" text="Buscar" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true"
+                                       preserveRatio="true">
+                                <Image url="@../img/buscar.png"/>
+                            </ImageView>
+                        </graphic>
+                        <HBox.margin>
+                            <Insets left="380.0"/>
+                        </HBox.margin>
+                    </JFXButton>
+                </HBox>
+                <TableView prefHeight="499.0" prefWidth="966.0" style="-fx-background-color: #1E5DBA;">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="C1"/>
+                        <TableColumn prefWidth="75.0" text="C2"/>
+                    </columns>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </TableView>
+            </VBox>
+        </center>
+    </BorderPane>
+</AnchorPane>

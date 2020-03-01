@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="732.0" prefWidth="1366.0" style="-fx-background-color: #6EA6F3;"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controlador.MenuPrincipalController">
+   <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <top><![CDATA[
+         ]]><HBox prefHeight="122.0" prefWidth="1366.0" style="-fx-background-color: #1E5DBA; -fx-border-color: white;"
+               BorderPane.alignment="CENTER">
+         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../img/logo.png"/>
+         </ImageView>
+            <Label prefHeight="160.0" prefWidth="369.0" text="Papeleria la Montaña" textAlignment="CENTER"
+                   textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="36.0"/>
+               </font>
+            </Label>
+         <GridPane prefHeight="150.0" prefWidth="845.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <JFXButton mnemonicParsing="false" prefHeight="43.0" prefWidth="72.0"
+                       style="-fx-background-color: #FBB748;" text="Salir" textFill="WHITE"
+                       GridPane.columnIndex="1">
+               <font>
+                  <Font size="20.0"/>
+               </font>
+               <GridPane.margin>
+                  <Insets left="345.0" top="1.0"/>
+               </GridPane.margin>
+            </JFXButton>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <Label prefHeight="62.0" prefWidth="79.0" text="Usuario:" textFill="WHITE">
+                  <font>
+                     <Font size="20.0"/>
+                  </font>
+               </Label>
+               <Label fx:id="lUsuario" prefHeight="50.0" prefWidth="318.0" textFill="WHITE">
+                  <font>
+                     <Font size="20.0"/>
+                  </font>
+                  <HBox.margin>
+                     <Insets left="20.0"/>
+                  </HBox.margin><![CDATA[
+               ]]></Label>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <Label prefHeight="57.0" prefWidth="61.0" text="Fecha:" textFill="WHITE">
+                  <font>
+                     <Font size="20.0"/>
+                  </font>
+               </Label>
+               <Label fx:id="lFecha" prefHeight="50.0" prefWidth="355.0" textFill="WHITE">
+                  <font>
+                     <Font size="20.0"/>
+                  </font>
+                  <padding>
+                     <Insets left="20.0"/>
+                  </padding>
+               </Label>
+            </HBox>
+         </GridPane>
+         </HBox>
+      </top>
+      <center>
+         <GridPane prefHeight="458.0" prefWidth="1228.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <BorderPane.margin>
+               <Insets bottom="100.0" top="100.0"/>
+            </BorderPane.margin>
+            <JFXButton fx:id="bVentas" alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="CENTER"
+                       minHeight="-Infinity" mnemonicParsing="false" prefHeight="180.0" prefWidth="313.0"
+                       ripplerFill="WHITE" style="-fx-background-color: #FBB748;" text="Ventas"
+                       textAlignment="CENTER">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <GridPane.margin>
+                  <Insets/>
+               </GridPane.margin>
+               <padding>
+                  <Insets right="5.0"/>
+               </padding>
+            </JFXButton>
+            <ImageView fitHeight="133.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+               <GridPane.margin>
+                  <Insets left="90.0"/>
+               </GridPane.margin>
+               <Image url="@../img/ventas.png"/>
+            </ImageView>
+            <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" mnemonicParsing="false"
+                       onAction="#mostrarVentanaMenuInventario" prefHeight="179.0" prefWidth="306.0"
+                       style="-fx-background-color: #F0741E;" text="Inventario" textAlignment="CENTER"
+                       textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="132.0" fitWidth="179.0" onMouseClicked="#mostrarVentanaMenuInventario"
+                       pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="89.0"/>
+               </GridPane.margin>
+               <Image url="@../img/inventario.png"/>
+            </ImageView>
+         </GridPane>
+      </center>
+      <left>
+         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+      </left>
+      <right>
+         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+      </right>
+   </BorderPane>
+</AnchorPane>

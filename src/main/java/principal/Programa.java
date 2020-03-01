@@ -1,37 +1,23 @@
 package principal;
 
 import controlador.IniciarSesionController;
+import controlador.MenuPrincipalController;
 import javafx.scene.layout.Pane;
-import modelo.Articulo;
-import modelo.Persona;
-import modelo.Usuario;
-import modelo.persistencia.Articulos;
-import modelo.persistencia.UsuarioDAO;
-import modelo.persistencia.Usuarios;
-
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import java.util.List;
+import modelo.Usuario;
 
 public class Programa extends Application{
-    private final String RUTA_LOGO = "@.." + File.separator + "img" + File.separator+ "logo.png";
     private Stage stagePrincipal;
     private Pane rootPane;
+    private Usuario usuarioLogeado;
 
-    public void ventanaInicioSesion() throws IOException{
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/InicioSesion.fxml"));
+    public void cambiarAVentanaInicioSesion() throws IOException{
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/inicio_sesion.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
         stagePrincipal.setTitle("Iniciar sesion");
@@ -40,12 +26,24 @@ public class Programa extends Application{
         controller.setVentanaPrincipal(this);
         stagePrincipal.show();
     }
+
+    public void cambiarAVentanaMenuPrincipal() throws IOException{
+        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/menu_principal.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña - Menu");
+        MenuPrincipalController controller = loader.getController();
+        controller.setManejadorDeVentanas(this);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
+
     public static void main(String[] args){
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         this.stagePrincipal = stage;
         stagePrincipal.setMaximized(true);
         stagePrincipal.setResizable(false);
@@ -53,10 +51,30 @@ public class Programa extends Application{
         stagePrincipal.getIcons().add(icon);
         stagePrincipal.setIconified(true);
         try {
-            ventanaInicioSesion();
+            cambiarAVentanaInicioSesion();
         } catch (IOException ex) {
             System.out.println("IOE: MainApp.start");
             ex.printStackTrace();
         }
+    }
+
+    public Usuario getUsuarioLogeado(){
+        return usuarioLogeado;
+    }
+
+    public void setUsuarioLogeado(Usuario usuarioLogeado){
+        this.usuarioLogeado = usuarioLogeado;
+    }
+
+    public Stage getStagePrincipal(){
+        return stagePrincipal;
+    }
+
+    public Pane getRootPane(){
+        return rootPane;
+    }
+
+    public void setRootPane(Pane rootPane){
+        this.rootPane = rootPane;
     }
 }

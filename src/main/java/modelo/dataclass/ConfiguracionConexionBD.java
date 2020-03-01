@@ -12,7 +12,7 @@ public class ConfiguracionConexionBD {
         this.usuario = "chino";
         this.contrasena = "joseMiguel13129899";
         this.db = "mydb";
-        this.configuracionesExtra = "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City&security?useSSL=false";
+        this.configuracionesExtra = "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City";
     }
 
     public ConfiguracionConexionBD(String usuario, String contrasena, String host,

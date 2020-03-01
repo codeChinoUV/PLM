@@ -1,6 +1,8 @@
 package modelo.persistencia;
 
 import modelo.Articulo;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Articulos implements ArticulosDAO {
-
-  private final String CONSULTA_TODOS_LOS_ARTICULOS = "SELECT * FROM articulo";
-  private final String CONSULTA_BUSCAR_ARTICULOS = "SELECT * FROM articulo WHERE nombre LIKE ";
-  private final String AGREGAR_ARTICULO = "INSERT INTO articulo(codigo_barras, nombre, cantidad, piezas_mayoreo, " +
-      "ganancia_mayoreo, ganancia, precio_venta, precio_mayoreo, precio_compra, estado_borrado) VALUES(";
-  private final String EDITAR_ARTICULO = "UPDATE articulo SET codigoDeBarras=";
 
   private Articulo recuperarArticulo(ResultSet resultadosDeConsulta) throws SQLException {
     Articulo articulo = null;
@@ -36,15 +32,16 @@ public class Articulos implements ArticulosDAO {
     return articulo;
   }
 
-  public List<Articulo> getArticulos(){
+  public List<Articulo> getArticulos() throws SQLException, IOException, ClassNotFoundException {
     List<Articulo> articulos = new ArrayList<>();
     Connection conexion = Conexion.getConexion();
     Statement consulta;
     ResultSet resultados;
     try{
       consulta = conexion.createStatement();
+      String CONSULTA_TODOS_LOS_ARTICULOS = "SELECT * FROM articulo";
       resultados = consulta.executeQuery(CONSULTA_TODOS_LOS_ARTICULOS);
-      while (resultados.next() && resultados!= null){
+      while (resultados.next()){
         articulos.add(recuperarArticulo(resultados));
       }
       conexion.close();
@@ -60,16 +57,17 @@ public class Articulos implements ArticulosDAO {
     return articulos;
   }
 
-  public List<Articulo> buscarArticulos(String nombre){
+  public List<Articulo> buscarArticulos(String nombre) throws SQLException, IOException, ClassNotFoundException{
     List<Articulo> articulos = new ArrayList<>();
     Connection conexion = Conexion.getConexion();
     Statement consulta;
     ResultSet resultados;
+    String CONSULTA_BUSCAR_ARTICULOS = "SELECT * FROM articulo WHERE nombre LIKE ";
     String query = CONSULTA_BUSCAR_ARTICULOS + "''" + nombre + "';'";
     try{
       consulta = conexion.createStatement();
       resultados = consulta.executeQuery(query);
-      while (resultados.next() && resultados != null){
+      while (resultados.next()){
         articulos.add(recuperarArticulo(resultados));
       }
       conexion.close();
@@ -85,8 +83,10 @@ public class Articulos implements ArticulosDAO {
     return articulos;
   }
 
-  public boolean nuevoArticulo(Articulo articulo) {
+  public boolean nuevoArticulo(Articulo articulo) throws SQLException, IOException, ClassNotFoundException{
     if (articulo != null) {
+      String AGREGAR_ARTICULO = "INSERT INTO articulo(codigo_barras, nombre, cantidad, piezas_mayoreo, " +
+          "ganancia_mayoreo, ganancia, precio_venta, precio_mayoreo, precio_compra, estado_borrado) VALUES(";
       String query = AGREGAR_ARTICULO + "'" + articulo.getCodigoBarras() + "','" + articulo.getNombre() + "',"
           + articulo.getCantidad() + "," + articulo.getPiezasParaMayoreo() + "," + articulo.getGananciaMayoreo()
           + "," + articulo.getGanancia() + "," + articulo.getPrecioVenta() + "," + articulo.getPrecioMayoreo()
@@ -106,8 +106,9 @@ public class Articulos implements ArticulosDAO {
     }
   }
 
-  public boolean editarArticulo(int codigo, Articulo articulo){
+  public boolean editarArticulo(int codigo, Articulo articulo) throws SQLException, IOException, ClassNotFoundException{
     if (codigo < 0 && articulo != null){
+      String EDITAR_ARTICULO = "UPDATE articulo SET codigoDeBarras=";
       String query =  EDITAR_ARTICULO + "'"+ articulo.getCodigoBarras() + "', nombre='" + articulo.getNombre()
           + "', cantidad=" + articulo.getCantidad() + ", piezas_mayoreo=" + articulo.getPiezasParaMayoreo()
           + ", ganancia_mayoreo=" + articulo.getGananciaMayoreo() + ", ganancia=" + articulo.getGanancia()

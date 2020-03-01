@@ -1,6 +1,5 @@
 package controlador;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -11,17 +10,15 @@ import modelo.Usuario;
 import modelo.persistencia.UsuarioDAO;
 import modelo.persistencia.Usuarios;
 import principal.Programa;
-
+import javax.net.ssl.SSLException;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class IniciarSesionController implements Initializable {
-  private Usuario usuario = null;
 
   private Programa ventanaPrincipal = null;
-
-  @FXML
-  private JFXButton btnIniciarSesion;
 
   @FXML
   private JFXTextField tfUsuario;
@@ -71,8 +68,16 @@ public class IniciarSesionController implements Initializable {
    * @return Un objeto de tipo usuario al que le pertenecen las credenciales o null si no se encuentra las credenciasles
    */
   private Usuario logearse(String usuario, String contrasena){
+    Usuario usuarioLogeado = null;
     UsuarioDAO persistenciaUsuario = new Usuarios();
-    Usuario usuarioLogeado = persistenciaUsuario.logearse(usuario,contrasena);
+    try{
+      usuarioLogeado = persistenciaUsuario.logearse(usuario,contrasena);
+    }catch (SSLException excepcionSSL){
+      System.out.println(excepcionSSL.getMessage());
+    }catch (SQLException | ClassNotFoundException | IOException excepcionConsulta){
+      VentanasEmergentes.mostrarVentanaError(excepcionConsulta.getMessage());
+      excepcionConsulta.printStackTrace();
+    }
     return usuarioLogeado;
   }
 
@@ -86,9 +91,10 @@ public class IniciarSesionController implements Initializable {
     if(verificarCamposLlenos(username,contrasena)){
       Usuario usuarioLogeo = logearse(username,contrasena);
       if(usuarioLogeo != null){
-        this.usuario = usuarioLogeo;
         lMensaje.setText("¡Logeado exitosamente!");
+        ventanaPrincipal.setUsuarioLogeado(usuarioLogeo);
         cambiarTextoColor(lMensaje,"#009900");
+        cambiarAVentanaMenuPrincipal();
       }else{
         lMensaje.setText("¡Credenciales invalidas!");
         cambiarTextoColor(lMensaje,"#FF0000");
@@ -96,8 +102,20 @@ public class IniciarSesionController implements Initializable {
     }
   }
 
-  public Programa getVentanaPrincipal() {
-    return ventanaPrincipal;
+  /**
+   * Cambia la escena actual por la menu_principal
+   */
+  private void cambiarAVentanaMenuPrincipal(){
+    if(ventanaPrincipal != null){
+      try{
+        ventanaPrincipal.cambiarAVentanaMenuPrincipal();
+      }catch (IOException excepcionAlLeerArchivo){
+        VentanasEmergentes.mostrarVentanaError("Algo salio mal al iniciar sesión");
+        excepcionAlLeerArchivo.printStackTrace();
+      }
+    }else{
+      VentanasEmergentes.mostrarVentanaError("Esta vacio el menu principal");
+    }
   }
 
   public void setVentanaPrincipal(Programa ventanaPrincipal) {
