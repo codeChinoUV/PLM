@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ArticulosDAO {
-  List<Articulo> getArticulos() throws SQLException, IOException, ClassNotFoundException;
+  List<Articulo> getArticulosNoEliminados() throws SQLException, IOException, ClassNotFoundException;
   List<Articulo> buscarArticulos(String nombre) throws SQLException, IOException, ClassNotFoundException;
-  boolean nuevoArticulo(Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
-  boolean editarArticulo(int codigo, Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
+  int nuevoArticulo(Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
+  int editarArticulo(int codigo, Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
 }

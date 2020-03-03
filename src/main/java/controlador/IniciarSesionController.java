@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import modelo.Persona;
 import modelo.Usuario;
 import modelo.persistencia.UsuarioDAO;
 import modelo.persistencia.Usuarios;
@@ -116,6 +117,27 @@ public class IniciarSesionController implements Initializable {
     }else{
       VentanasEmergentes.mostrarVentanaError("Esta vacio el menu principal");
     }
+  }
+
+  public void registrarUsuarioPrincipal(){
+    Persona persona = new Persona();
+    persona.setNombre("Jose Miguel");
+    persona.setApellidos("Quiroz Benitez");
+    persona.setTelefono("2821125536");
+    persona.setDireccion("Amado Nervo #5");
+    Usuario usuario = new Usuario();
+    usuario.setActivo(true);
+    usuario.setUsuario("chino");
+    usuario.setContrasena("hola9011");
+    usuario.setTipo("Administrador");
+    usuario.setPersona(persona);
+    UsuarioDAO usurioPersistencia = new Usuarios();
+    try{
+      usurioPersistencia.registrarUsuario(usuario);
+    }catch (SQLException | IOException | ClassNotFoundException excepcion){
+      VentanasEmergentes.mostrarVentanaError("No se pudo registrar el usuario");
+    }
+
   }
 
   public void setVentanaPrincipal(Programa ventanaPrincipal) {

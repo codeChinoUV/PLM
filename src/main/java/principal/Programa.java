@@ -2,6 +2,7 @@ package principal;
 
 import controlador.IniciarSesionController;
 import controlador.MenuPrincipalController;
+import javafx.animation.Transition;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 import javafx.application.Application;

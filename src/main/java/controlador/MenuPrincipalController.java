@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import principal.Programa;
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -76,5 +75,7 @@ public class MenuPrincipalController implements Initializable {
     }
 
   }
+
+
 
 }

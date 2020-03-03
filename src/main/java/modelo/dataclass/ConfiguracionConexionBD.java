@@ -11,17 +11,8 @@ public class ConfiguracionConexionBD {
         this.host = "localhost";
         this.usuario = "chino";
         this.contrasena = "joseMiguel13129899";
-        this.db = "mydb";
+        this.db = "PLM";
         this.configuracionesExtra = "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City";
-    }
-
-    public ConfiguracionConexionBD(String usuario, String contrasena, String host,
-                                   String db, String configuracionesExtra){
-        this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.db = db;
-        this.host = host;
-        this.configuracionesExtra = configuracionesExtra;
     }
 
     /**

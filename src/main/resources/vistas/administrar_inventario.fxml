@@ -7,93 +7,185 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1366.0" style="-fx-background-color: #6EA6F3;"
-            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controlador.AdministrarInventarioController">
-    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="732.0" prefWidth="1366.0" style="-fx-background-color: #6EA6F3;" stylesheets="@../estilos/administrar_inventario_tabla.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.AdministrarInventarioController">
+    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
-            <HBox prefHeight="122.0" prefWidth="1366.0" style="-fx-background-color: #1E5DBA; -fx-border-color: white;"
-                  BorderPane.alignment="CENTER">
+            <HBox prefHeight="122.0" prefWidth="1366.0" style="-fx-background-color: #1E5DBA;" BorderPane.alignment="CENTER">
                 <ImageView fitHeight="111.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/logo.png"/>
+                    <Image url="@../img/logo.png" />
                     <HBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <Label prefHeight="110.0" prefWidth="419.0" text="Administrar inventario" textAlignment="CENTER"
-                       textFill="WHITE">
+                <Label prefHeight="110.0" prefWidth="419.0" text="Administrar inventario" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="System Bold Italic" size="36.0"/>
+                        <Font name="System Bold Italic" size="36.0" />
                     </font>
                     <padding>
-                        <Insets left="20.0"/>
+                        <Insets left="20.0" />
                     </padding>
                     <HBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </HBox.margin>
                 </Label>
-                <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP"
-                           mnemonicParsing="false" prefHeight="104.0" prefWidth="135.0"
-                           style="-fx-background-color: #F14634;" text="Regresar" textAlignment="CENTER"
-                           textFill="WHITE">
-                    <HBox.margin>
-                        <Insets left="680.0" top="5.0"/>
-                    </HBox.margin>
-                    <font>
-                        <Font size="15.0"/>
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="74.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../img/regresar.png"/>
-                        </ImageView>
-                    </graphic>
-                </JFXButton>
+            <GridPane prefHeight="122.0" prefWidth="433.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <HBox.margin>
+                  <Insets left="400.0" />
+               </HBox.margin>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="61.0" prefWidth="81.0" text="Usuario:" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lUsuario" prefHeight="61.0" prefWidth="335.0" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label prefHeight="61.0" prefWidth="65.0" text="Fecha:" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lFecha" prefHeight="91.0" prefWidth="330.0" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
             </HBox>
         </top>
-        <left>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
-        </left>
-        <right>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
-        </right>
         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                     <Label prefHeight="58.0" prefWidth="78.0" text="Buscar:" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="20.0"/>
+                            <Font name="System Bold" size="20.0" />
                         </font>
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
                     </Label>
-                    <JFXTextField focusColor="#f0741e" prefHeight="21.0" prefWidth="400.0"
-                                  unFocusColor="#1e5dba">
+                    <JFXTextField focusColor="#f0741e" prefHeight="21.0" prefWidth="400.0" unFocusColor="#1e5dba">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </JFXTextField>
-                    <JFXButton buttonType="RAISED" mnemonicParsing="false" prefHeight="39.0" prefWidth="104.0"
-                               style="-fx-background-color: #F0741E;" text="Buscar" textFill="WHITE">
+                    <JFXButton buttonType="RAISED" mnemonicParsing="false" prefHeight="39.0" prefWidth="104.0" style="-fx-background-color: #F0741E;" text="Buscar" textFill="WHITE">
                         <graphic>
-                            <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true"
-                                       preserveRatio="true">
-                                <Image url="@../img/buscar.png"/>
+                            <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../img/buscar.png" />
                             </ImageView>
                         </graphic>
                         <HBox.margin>
-                            <Insets left="380.0"/>
+                            <Insets left="525.0" />
                         </HBox.margin>
                     </JFXButton>
                 </HBox>
-                <TableView prefHeight="499.0" prefWidth="966.0" style="-fx-background-color: #1E5DBA;">
+                <TableView fx:id="tProductos" prefHeight="499.0" prefWidth="950.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1"/>
-                        <TableColumn prefWidth="75.0" text="C2"/>
+                        <TableColumn fx:id="tcCodigo" prefWidth="75.0" resizable="false" text="Codigo" />
+                        <TableColumn fx:id="tcCodigoBarras" prefWidth="131.99996948242188" resizable="false" text="Codigo de barras" />
+                  <TableColumn fx:id="tcDescripcion" maxWidth="6000.0" prefWidth="371.0" resizable="false" text="Descripcion del producto" />
+                  <TableColumn fx:id="tcPrecioPublico" prefWidth="103.0" resizable="false" text="Precio publico" />
+                  <TableColumn fx:id="tcPrecioMayoreo" prefWidth="116.0" resizable="false" text="Precio mayoreo" />
+                  <TableColumn fx:id="tcPzasMayoreo" prefWidth="131.0" resizable="false" text="Pzas para mayoreo" />
+                  <TableColumn fx:id="tcCantidad" prefWidth="78.0" resizable="false" text="Cantidad" />
+                  <TableColumn fx:id="tcUnidad" prefWidth="67.0" resizable="false" text="Unidad" />
                     </columns>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets left="45.0" right="45.0" top="10.0" />
                     </VBox.margin>
                 </TableView>
             </VBox>
         </center>
+      <right>
+         <VBox alignment="TOP_CENTER" prefHeight="610.0" prefWidth="190.0" style="-fx-border-color: #FBB748; -fx-border-width: 5px;" BorderPane.alignment="TOP_CENTER">
+            <children>
+               <Label contentDisplay="CENTER" text="Opciones" textFill="WHITE">
+                  <font>
+                     <Font name="System Bold" size="20.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets top="15.0" />
+                  </VBox.margin>
+               </Label>
+               <JFXButton buttonType="RAISED" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="167.0" style="-fx-background-color: #FBB748;" text="Registrar producto">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+                  <graphic>
+                     <ImageView fitHeight="58.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/agregar.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </JFXButton>
+               <JFXButton buttonType="RAISED" contentDisplay="TOP" mnemonicParsing="false" prefHeight="103.0" prefWidth="167.0" style="-fx-background-color: #FBB748;" text="Editar producto">
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <graphic>
+                     <ImageView fitHeight="63.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/editar.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </JFXButton>
+               <JFXButton buttonType="RAISED" contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="167.0" style="-fx-background-color: #FBB748;" text="Eliminar pruducto" textOverrun="CENTER_WORD_ELLIPSIS">
+                  <graphic>
+                     <ImageView fitHeight="70.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../img/eliminar.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+               </JFXButton>
+                   <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" mnemonicParsing="false" prefHeight="115.0" prefWidth="166.0" style="-fx-background-color: #F14634;" text="Regresar" textAlignment="CENTER" textFill="WHITE">
+                       <font>
+                           <Font size="15.0" />
+                       </font>
+                       <graphic>
+                           <ImageView fitHeight="74.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                               <Image url="@../img/regresar.png" />
+                           </ImageView>
+                       </graphic>
+                  <VBox.margin>
+                     <Insets top="30.0" />
+                  </VBox.margin>
+                   </JFXButton>
+            </children></VBox>
+      </right>
     </BorderPane>
 </AnchorPane>

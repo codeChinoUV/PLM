@@ -12,10 +12,11 @@ public class Articulo {
     private double precioMayoreo;
     private double precioCompra;
     private boolean estadoBorrado;
+    private String tipoUnidad;
 
     public Articulo(int codigo, String codigoBarras, String nombre, int cantidad, int piezasParaMayoreo,
                     double gananciaMayoreo, double ganancia, double precioVenta, double precioMayoreo,
-                    double precioCompra, boolean estadoBorrado) {
+                    double precioCompra, boolean estadoBorrado, String tipoUnidad) {
         this.codigo = codigo;
         this.codigoBarras = codigoBarras;
         this.nombre = nombre;
@@ -27,6 +28,7 @@ public class Articulo {
         this.precioMayoreo = precioMayoreo;
         this.precioCompra = precioCompra;
         this.estadoBorrado = estadoBorrado;
+        this.tipoUnidad = tipoUnidad;
     }
 
     public Articulo() {
@@ -143,5 +145,13 @@ public class Articulo {
 
     public void setEstadoBorrado(boolean estadoBorrado) {
         this.estadoBorrado = estadoBorrado;
+    }
+
+    public String getTipoUnidad() {
+        return tipoUnidad;
+    }
+
+    public void setTipoUnidad(String tipoUnidad) {
+        this.tipoUnidad = tipoUnidad;
     }
 }

@@ -67,7 +67,7 @@ public class Usuarios implements UsuarioDAO{
   public Usuario logearse(String usuario, String contrasena) throws SQLException, IOException, ClassNotFoundException {
     Usuario usuarioRecuperado = null;
     Connection conexion = Conexion.getConexion();
-    String CONSULTA_LOGEO = "SELECT * FROM usuario WHERE usuario = ? and contrasena = ? ;";
+    String CONSULTA_LOGEO = "SELECT * FROM usuario WHERE usuario = ? and contrasena = ? and activo = true;";
     PreparedStatement consulta = conexion.prepareStatement(CONSULTA_LOGEO);
     consulta.setString(1,usuario);
     consulta.setString(2, Encriptacion.toSHA256(contrasena));

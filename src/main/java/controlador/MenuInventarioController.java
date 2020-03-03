@@ -17,15 +17,11 @@ public class MenuInventarioController implements Initializable {
   @FXML
   private JFXButton bRegresar;
   @FXML
-  private JFXButton bVentas;
-  @FXML
   private Label lUsuario;
   @FXML
   private Label lFecha;
 
   private Programa manejadorDeVentanas;
-
-
 
   /**
    * Coloca el nombre del usuario logeado en el label lUsuario
