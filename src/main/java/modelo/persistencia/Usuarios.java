@@ -2,6 +2,7 @@ package modelo.persistencia;
 import controlador.util.Encriptacion;
 import modelo.Persona;
 import modelo.Usuario;
+import modelo.enums.EnumTipoUsuario;
 
 import java.io.IOException;
 import java.sql.*;
@@ -22,12 +23,13 @@ public class Usuarios implements UsuarioDAO{
       if (resultadosDeConsulta != null){
       String nombreUsuario = resultadosDeConsulta.getString("usuario");
       String tipo = resultadosDeConsulta.getString("tipo_usuario");
+      EnumTipoUsuario tipoUsuario = EnumTipoUsuario.valueOf(tipo);
       boolean activo = resultadosDeConsulta.getBoolean("activo");
       Persona persona = new Persona();
       persona.setId(resultadosDeConsulta.getInt("persona_id_persona"));
       persona = getPersona(persona);
       if(persona != null){
-        usuarioRecuperado = new Usuario(nombreUsuario,tipo,persona,activo);
+        usuarioRecuperado = new Usuario(nombreUsuario,tipoUsuario,persona,activo);
       }
     }
       return usuarioRecuperado;
@@ -99,7 +101,7 @@ public class Usuarios implements UsuarioDAO{
     PreparedStatement consulta = conexion.prepareStatement(REGISTRO_USUARIO);
     consulta.setString(1,usuario.getUsuario());
     consulta.setString(2,Encriptacion.toSHA256(usuario.getContrasena()));
-    consulta.setString(3,usuario.getTipo());
+    consulta.setString(3,usuario.getTipo().getNombreTipoUsuario());
     consulta.setBoolean(4,usuario.isActivo());
     consulta.setInt(5, usuario.getPersona().getId());
     if(usuario.getPersona() != null){

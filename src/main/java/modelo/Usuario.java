@@ -1,22 +1,24 @@
 package modelo;
 
+import modelo.enums.EnumTipoUsuario;
+
 import java.util.List;
 
 public class Usuario {
     private String usuario;
     private String contrasena;
-    private String tipo;
+    private EnumTipoUsuario tipo;
     private boolean activo;
     private Persona persona;
 
-    public Usuario(String usuario, String tipo, Persona persona, boolean activo) {
+    public Usuario(String usuario, EnumTipoUsuario tipo, Persona persona, boolean activo) {
         this.usuario = usuario;
         this.tipo = tipo;
         this.persona = persona;
         this.activo = activo;
     }
 
-    public Usuario(String usuario, String contrasena, String tipo) {
+    public Usuario(String usuario, String contrasena, EnumTipoUsuario tipo) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.tipo = tipo;
@@ -34,11 +36,11 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public String getTipo() {
+    public EnumTipoUsuario getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(EnumTipoUsuario tipo) {
         this.tipo = tipo;
     }
 

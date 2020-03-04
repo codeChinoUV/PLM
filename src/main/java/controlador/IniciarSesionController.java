@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import modelo.Persona;
 import modelo.Usuario;
+import modelo.enums.EnumTipoUsuario;
 import modelo.persistencia.UsuarioDAO;
 import modelo.persistencia.Usuarios;
 import principal.Programa;
@@ -129,7 +130,7 @@ public class IniciarSesionController implements Initializable {
     usuario.setActivo(true);
     usuario.setUsuario("chino");
     usuario.setContrasena("hola9011");
-    usuario.setTipo("Administrador");
+    usuario.setTipo(EnumTipoUsuario.Administrador);
     usuario.setPersona(persona);
     UsuarioDAO usurioPersistencia = new Usuarios();
     try{
