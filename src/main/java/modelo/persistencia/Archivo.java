@@ -1,6 +1,5 @@
 package modelo.persistencia;
 
-import controlador.util.InformacionSO;
 import modelo.dataclass.ConfiguracionConexionBD;
 
 import java.io.File;

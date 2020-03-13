@@ -2,6 +2,7 @@ package controlador;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import controlador.util.VerificacionDeTexto;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -90,7 +91,7 @@ public class IniciarSesionController implements Initializable {
   public void iniciarSesion(){
     String username = tfUsuario.getText();
     String contrasena = tfcontrasena.getText();
-    if(verificarCamposLlenos(username,contrasena)){
+    if(VerificacionDeTexto.esElUsuarioValido(username) && VerificacionDeTexto.esLaContrasenaValida(contrasena)){
       Usuario usuarioLogeo = logearse(username,contrasena);
       if(usuarioLogeo != null){
         lMensaje.setText("¡Logeado exitosamente!");
@@ -101,6 +102,9 @@ public class IniciarSesionController implements Initializable {
         lMensaje.setText("¡Credenciales invalidas!");
         cambiarTextoColor(lMensaje,"#FF0000");
       }
+    }else{
+      VentanasEmergentes.mostrarVentanaAlerta("No se permiten espacios, caracteres especiales, numeros " +
+          "o acentos en el nombre de usuario");
     }
   }
 
