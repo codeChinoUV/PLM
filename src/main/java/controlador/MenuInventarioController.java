@@ -14,8 +14,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MenuInventarioController implements Initializable {
-  @FXML
-  private JFXButton bRegresar;
+
   @FXML
   private Label lUsuario;
   @FXML

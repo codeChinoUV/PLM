@@ -1,12 +1,20 @@
 package modelo.persistencia;
 
+import controlador.observable.IObservable;
+import controlador.observable.IObserver;
 import modelo.Articulo;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Articulos implements ArticulosDAO {
+public class Articulos implements ArticulosDAO, IObservable {
+
+  private ArrayList<IObserver> observers;
+
+  public Articulos(){
+    observers = new ArrayList<>();
+  }
 
   /**
    * Recupera la información de un Articulo a partir de la información de un ResultSet
@@ -95,6 +103,7 @@ public class Articulos implements ArticulosDAO {
       PreparedStatement consulta = prepararInsertarNuevoArticulo(articulo, conexion);
       seRegistro = consulta.executeUpdate();
     }
+    notificar();
     return seRegistro;
   }
 
@@ -110,19 +119,7 @@ public class Articulos implements ArticulosDAO {
     String AGREGAR_ARTICULO = "INSERT INTO articulo(codigo_barras, nombre, cantidad, piezas_mayoreo, " +
         "ganancia_mayoreo, ganancia, precio_venta, precio_mayoreo, precio_compra, estado_borrado, tipo_unidad) " +
         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    PreparedStatement consulta = conexion.prepareStatement(AGREGAR_ARTICULO);
-    consulta.setString(1,articuloARegistrar.getCodigoBarras());
-    consulta.setString(2,articuloARegistrar.getNombre());
-    consulta.setInt(3,articuloARegistrar.getCantidad());
-    consulta.setInt(4,articuloARegistrar.getPiezasParaMayoreo());
-    consulta.setDouble(5,articuloARegistrar.getGananciaMayoreo());
-    consulta.setDouble(6,articuloARegistrar.getGanancia());
-    consulta.setDouble(7,articuloARegistrar.getPrecioVenta());
-    consulta.setDouble(8,articuloARegistrar.getPrecioMayoreo());
-    consulta.setDouble(9,articuloARegistrar.getPrecioCompra());
-    consulta.setBoolean(10,articuloARegistrar.isEstadoBorrado());
-    consulta.setString(11,articuloARegistrar.getTipoUnidad());
-    return consulta;
+    return prepararConsultaArticulo(articuloARegistrar, conexion, AGREGAR_ARTICULO);
   }
 
   /**
@@ -142,6 +139,7 @@ public class Articulos implements ArticulosDAO {
       seEdito = consulta.executeUpdate();
 
     }
+    notificar();
     return seEdito;
   }
 
@@ -158,8 +156,27 @@ public class Articulos implements ArticulosDAO {
     String EDITAR_ARTICULO = "UPDATE articulo SET codigo_barras= ?, nombre= ?, cantidad= ?, piezas_mayoreo= ?, " +
         "ganancia_mayoreo= ?, ganancia= ?, precio_venta= ?, precio_mayoreo= ?, precio_compra= ?, estado_borrado= ?," +
         " tipo_unidad= ? WHERE codigo= ?;";
-    PreparedStatement consulta = conexion.prepareStatement(EDITAR_ARTICULO);
-    consulta.setString(1,articulo.getCodigoBarras());
+    prepararConsultaArticulo(articulo, conexion, EDITAR_ARTICULO);
+    PreparedStatement consulta = prepararConsultaArticulo(articulo, conexion, EDITAR_ARTICULO);
+    consulta.setInt(12,codigo);
+    return consulta;
+  }
+
+  /**
+   * Prepara una consulta general sobre un articulo
+   * @param articulo El articulo de donde se obtendran los datos
+   * @param conexion La conexion en donde se prepara el statement
+   * @param CONSULTA La consulta que se preparara
+   * @return La consulta preparada
+   * @throws SQLException Una excepcion que indica que ocurrio un error preparando la consulta
+   */
+  private PreparedStatement prepararConsultaArticulo(Articulo articulo, Connection conexion, String CONSULTA) throws SQLException {
+    PreparedStatement consulta = conexion.prepareStatement(CONSULTA);
+    if(!articulo.getCodigoBarras().equals("") ){
+      consulta.setString(1,articulo.getCodigoBarras());
+    }else{
+      consulta.setString(1,null);
+    }
     consulta.setString(2,articulo.getNombre());
     consulta.setInt(3,articulo.getCantidad());
     consulta.setInt(4,articulo.getPiezasParaMayoreo());
@@ -170,8 +187,75 @@ public class Articulos implements ArticulosDAO {
     consulta.setDouble(9,articulo.getPrecioCompra());
     consulta.setBoolean(10,articulo.isEstadoBorrado());
     consulta.setString(11,articulo.getTipoUnidad());
-    consulta.setInt(12,codigo);
     return consulta;
+  }
+
+  /**
+   * Verifica si el codigo de barras que se encuentra ya se encuentra registrado
+   * @param codigoBarras El codigo de barras que se verificara si se encuentra registrado
+   * @return Verdadero si el codigo de barras ya se encuentra registrado en un producto o falso si no
+   * @throws SQLException Una excepcion que indica que ocurrio un error al ejecutar la consulta
+   * @throws IOException Una excepcion que indica que ocurrio un error al leer el archivo de configuracion en la BD
+   * @throws ClassNotFoundException Una excepcion que indica que no se encontro la libreria que permite la conexion a
+   * la BD
+   */
+  public boolean existeElCodigoDeBarras(String codigoBarras) throws SQLException, IOException, ClassNotFoundException{
+    String CONSULTA_BUSCAR_CODIGO_BARRAS = "SELECT count(codigo_barras) as 'cantidad_codigos_barras' FROM articulo " +
+        "WHERE codigo_barras = ? ;";
+    Connection conexion = Conexion.getConexion();
+    PreparedStatement consulta = conexion.prepareStatement(CONSULTA_BUSCAR_CODIGO_BARRAS);
+    consulta.setString(1,codigoBarras);
+    ResultSet resultados = consulta.executeQuery();
+    resultados.last();
+    int cantidadRepetidos = resultados.getInt("cantidad_codigos_barras");
+    conexion.close();
+    return (cantidadRepetidos > 0);
+  }
+
+  /**
+   * Recupera el ultimo codigo insertado en un articulo
+   * @return El ultimo codigo insertado
+   * @throws SQLException Una excepcion que indica que ocurrio un error al ejecutar la consulta
+   * @throws IOException Una excepcion que indica que ocurrio un error al leer el archivo de configuración de la BD
+   * @throws ClassNotFoundException Una excepcion que indica que ocurrio un error al cargar la libreria de conexion a la
+   * BD
+   */
+  public int recuperarELUltimoIdInsertado() throws SQLException, IOException, ClassNotFoundException{
+    String CONSULTA_ULTIMO_CODIGO = "SELECT MAX(codigo) as 'ultimo_id' from articulo;";
+    Connection conexion = Conexion.getConexion();
+    PreparedStatement consulta = conexion.prepareStatement(CONSULTA_ULTIMO_CODIGO);
+    ResultSet resultados = consulta.executeQuery();
+    resultados.last();
+    int ultimoCodigo = resultados.getInt("ultimo_id");
+    conexion.close();
+    return ultimoCodigo;
+  }
+
+  /**
+   * Agrega un observador a la lista de observados
+   * @param observer objeto que implementa la interfaz IObserver.
+   */
+  @Override
+  public void agregarObserver(IObserver observer) {
+    observers.add(observer);
+  }
+
+  /**
+   * Elimina un odservador de la lista de observados
+   * @param observer objeto que implementa la interfaz IObserver.
+   */
+  @Override
+  public void eliminarObserver(IObserver observer) {
+    observers.remove(observer);
+  }
+
+  /**
+   * Notifica los observados de que ocurrio un cambio
+   */
+  private void notificar(){
+    for(IObserver observado : observers){
+      observado.update();
+    }
   }
 
 }

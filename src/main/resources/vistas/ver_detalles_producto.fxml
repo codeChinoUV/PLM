@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VerDetallesProductoController">
+    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <top>
+            <HBox prefHeight="69.0" prefWidth="600.0" style="-fx-background-color: #FBB748;" BorderPane.alignment="CENTER">
+                <ImageView fitHeight="73.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../img/logo.png" />
+                </ImageView>
+                <Label prefHeight="73.0" prefWidth="260.0" text="Ver detalles del producto" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                </Label>
+            </HBox>
+        </top>
+        <bottom>
+            <HBox prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="646.0">
+                    <JFXButton buttonType="RAISED" mnemonicParsing="false" onAction="#cerrarVentana" style="-fx-background-color: red;" text="Cerrar" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin></JFXButton>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+                </HBox>
+            </HBox>
+        </bottom>
+        <center>
+            <GridPane BorderPane.alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <JFXTextField fx:id="tfCodigo" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="80.0" promptText="Codigo" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfCodigoBarras" editable="false" focusColor="#f0741e" labelFloat="true" promptText="Codigo de barras" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfDescripcion" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="326.0" promptText="Descripcion" unFocusColor="#fbb748">
+                        <padding>
+                            <Insets left="15.0" />
+                        </padding>
+                    </JFXTextField>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <JFXTextField fx:id="tfPrecioCompra" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="126.0" promptText="Precio de compra" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfPrecioVenta" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="130.0" promptText="Precio de venta" unFocusColor="#fbb748">
+                        <padding>
+                            <Insets left="10.0" />
+                        </padding>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfPrecioMayoreo" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="132.0" promptText="Precio de mayoreo" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfCantidad" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="110.0" promptText="Cantidad" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <JFXTextField fx:id="tfPorcentajeGanancia" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="117.0" promptText="\% de ganancia" unFocusColor="#fbb748" />
+                    <JFXTextField fx:id="tfPorcentajeGananciaMayoreo" editable="false" focusColor="#f0741e" labelFloat="true" promptText="\% de ganancia mayoreo" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfPzasMayoreo" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="161.0" promptText="Pzas. para mayoreo" unFocusColor="#fbb748">
+                        <padding>
+                            <Insets left="15.0" />
+                        </padding>
+                    </JFXTextField>
+                    <JFXTextField fx:id="tfTipoUnidad" editable="false" focusColor="#f0741e" labelFloat="true" prefHeight="28.0" prefWidth="131.0" promptText="Tipo de unidad" unFocusColor="#fbb748">
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                </HBox>
+            </GridPane>
+        </center>
+    </BorderPane>
+</AnchorPane>

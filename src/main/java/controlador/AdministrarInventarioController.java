@@ -2,6 +2,7 @@ package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import controlador.observable.IObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdministrarInventarioController implements Initializable {
+public class AdministrarInventarioController implements Initializable, IObserver {
   @FXML
   private TableView<Articulo> tProductos;
   @FXML
@@ -59,7 +60,15 @@ public class AdministrarInventarioController implements Initializable {
   private JFXTextField tfBuscar;
 
   private Programa manejadorDeVentanas;
+  private Stage ventanaProducto;
 
+  /**
+   * Regresa el elemento de la tabla seleccionado
+   * @return El elemento de la tabla seleccionado o Null si no hay nada seleccionado
+   */
+  private Articulo obtenerArticuloSeleccionado(){
+    return tProductos.getSelectionModel().getSelectedItem();
+  }
   /**
    * Llena la table view tProductos con los articulos que se le pasen como parametro
    *
@@ -153,17 +162,59 @@ public class AdministrarInventarioController implements Initializable {
   public void mostrarVentanaRegistrarProducto(){
     FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/agregar_producto.fxml"));
     try{
-      Pane panelAMostrar = loader.load();
-      Scene escenaAMostrar = new Scene(panelAMostrar);
-      Stage ventanaAgregarProducto = new Stage();
-      ventanaAgregarProducto.setScene(escenaAMostrar);
-      ventanaAgregarProducto.setTitle("PLM - Registrar producto");
-      ventanaAgregarProducto.showAndWait();
+      if(ventanaProducto == null || !ventanaProducto.isShowing()){
+        Articulos persistenciaArticulos = new Articulos();
+        persistenciaArticulos.agregarObserver(this);
+        Pane panelAMostrar = loader.load();
+        Scene escenaAMostrar = new Scene(panelAMostrar);
+        ventanaProducto = new Stage();
+        ventanaProducto.setScene(escenaAMostrar);
+        ventanaProducto.setTitle("PLM - Registrar producto");
+        AgregarProductoController controlador = loader.getController();
+        controlador.setMiVentana(ventanaProducto);
+        controlador.setPersistenciaArticulos(persistenciaArticulos);
+        ventanaProducto.showAndWait();
+      }
     }catch (IOException excepcionAlCargarVentana){
       VentanasEmergentes.mostrarVentanaError(excepcionAlCargarVentana.getMessage());
       excepcionAlCargarVentana.printStackTrace();
     }
+  }
 
+  /**
+   * Recupera el articulo seleccionado
+   */
+  public void mostrarDetalles(){
+    Articulo articuloSeleccionado = obtenerArticuloSeleccionado();
+    if(articuloSeleccionado != null){
+      mostrarVentanaDetallesProducto(articuloSeleccionado);
+    }else{
+      VentanasEmergentes.mostrarVentanaAlerta("Debe de seleccionar un elemento de la tabla");
+    }
+  }
+
+  /**
+   * Muestra una ventana con la escena agregar_producto
+   */
+  private void mostrarVentanaDetallesProducto(Articulo articulo){
+    FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/ver_detalles_producto.fxml"));
+    try{
+      if(ventanaProducto == null || !ventanaProducto.isShowing()){
+        Pane panelAMostrar = loader.load();
+        Scene escenaAMostrar = new Scene(panelAMostrar);
+        ventanaProducto = new Stage();
+        ventanaProducto.setScene(escenaAMostrar);
+        ventanaProducto.setTitle("PLM - Ver detalles del producto");
+        VerDetallesProductoController controlador = loader.getController();
+        controlador.setMiVentana(ventanaProducto);
+        controlador.mostrarCamposParaTipoDeUsuario(manejadorDeVentanas.getUsuarioLogeado().getTipo());
+        controlador.setArticuloAMostrar(articulo);
+        ventanaProducto.showAndWait();
+      }
+    }catch (IOException excepcionAlCargarVentana){
+      VentanasEmergentes.mostrarVentanaError(excepcionAlCargarVentana.getMessage());
+      excepcionAlCargarVentana.printStackTrace();
+    }
   }
 
   @Override
@@ -176,5 +227,13 @@ public class AdministrarInventarioController implements Initializable {
     this.manejadorDeVentanas = manejadorDeVentanas;
     colocarNombreUsuario();
     mostrarOpcionesParaUsuario(manejadorDeVentanas.getUsuarioLogeado());
+  }
+
+  /**
+   * Metodo que se ejecuta cuando sucede un cambio en los datos de los Articulos
+   */
+  @Override
+  public void update() {
+    llenarTablaArticulos(obtenerArticulosDisponibles());
   }
 }

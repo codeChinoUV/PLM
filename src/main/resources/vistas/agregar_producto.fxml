@@ -27,7 +27,7 @@
       <bottom>
          <HBox prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="48.0" prefWidth="646.0">
-               <JFXButton buttonType="RAISED" mnemonicParsing="false" style="-fx-background-color: red;" text="Cancelar" textFill="WHITE" />
+               <JFXButton buttonType="RAISED" mnemonicParsing="false" onAction="#cerrarVentana" style="-fx-background-color: red;" text="Cancelar" textFill="WHITE" />
                <JFXButton buttonType="RAISED" mnemonicParsing="false" onAction="#agregarArticulo" style="-fx-background-color: green;" text="Guardar" textFill="WHITE">
                   <HBox.margin>
                      <Insets left="450.0" />

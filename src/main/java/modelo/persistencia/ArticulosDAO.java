@@ -11,4 +11,6 @@ public interface ArticulosDAO {
   List<Articulo> buscarArticulos(String nombre) throws SQLException, IOException, ClassNotFoundException;
   int nuevoArticulo(Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
   int editarArticulo(int codigo, Articulo articulo) throws SQLException, IOException, ClassNotFoundException;
+  boolean existeElCodigoDeBarras(String codigoBarras) throws SQLException, IOException, ClassNotFoundException;
+  int recuperarELUltimoIdInsertado() throws SQLException, IOException, ClassNotFoundException;
 }

@@ -4,10 +4,10 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import modelo.Articulo;
 import modelo.persistencia.Articulos;
 import modelo.persistencia.ArticulosDAO;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import static controlador.util.VerificacionDeTexto.*;
 
 public class AgregarProductoController implements Initializable {
+
   @FXML
   private JFXTextField tfCodigo;
   @FXML
@@ -39,6 +40,9 @@ public class AgregarProductoController implements Initializable {
   private JFXTextField tfPzasMayoreo;
   @FXML
   private JFXTextField tfTipoUnidad;
+
+  private Stage miVentana;
+  private ArticulosDAO persistenciaArticulos;
 
   /**
    * Crea un objeto de tipo Articulo a partir de la informacion de los campos de la escena
@@ -230,17 +234,82 @@ public class AgregarProductoController implements Initializable {
     colorearTodosLosCamposANormal();
     if(losCamposSonValidos()){
       Articulo articuloARegistrar = recuperarArticuloDeInformacionDeCampos();
-      ArticulosDAO persistenciaArticulos = new Articulos();
       try{
-        persistenciaArticulos.nuevoArticulo(articuloARegistrar);
+        if (!verificarSiExisteElCodigoDeBarras()) {
+          if(persistenciaArticulos.nuevoArticulo(articuloARegistrar) >= 1){
+            VentanasEmergentes.mostrarVentanaExito("El articulo se almaceno correctamente");
+            establecerTextoEnBlancoDeLosCampos();
+          }
+        }else{
+          VentanasEmergentes.mostrarVentanaAlerta("El codigo de barras ingresado ya se encuentra registrado, " +
+              "verifique si el articulo ya se encuentra registrado");
+        }
       }catch (SQLException | IOException | ClassNotFoundException excepcionAlRegistrar){
         VentanasEmergentes.mostrarVentanaError("Sucedio un error al guardar el articulo");
+        excepcionAlRegistrar.printStackTrace();
+        excepcionAlRegistrar.printStackTrace();
       }
     }
   }
 
+  /**
+   * Verifica si el codigo de barras ingresado ya se encuentra registrado
+   * @return Verdadero si ya existe o falso si no
+   * @throws SQLException Una excepcion si ocurre un error en la consulta
+   * @throws IOException Una excepcion que ocurre si hay un error al leer el archivo
+   * @throws ClassNotFoundException Una excepcion que ocurre si no se encuentra la libreria para la conexion a la BD
+   */
+  private boolean verificarSiExisteElCodigoDeBarras() throws SQLException, IOException, ClassNotFoundException{
+    String codigoBarras = tfCodigoBarras.getText();
+    boolean existeElCodigoDeBarras = false;
+    if(!codigoBarras.isEmpty()){
+      ArticulosDAO articulosPersistencia = new Articulos();
+      existeElCodigoDeBarras = articulosPersistencia.existeElCodigoDeBarras(codigoBarras);
+    }
+    return existeElCodigoDeBarras;
+  }
+
+  /**
+   * Coloca el texto de todos los campos del formulario en blanco
+   */
+  private void establecerTextoEnBlancoDeLosCampos(){
+    String textoVacio = "";
+    tfCodigoBarras.setText(textoVacio);
+    tfDescripcion.setText(textoVacio);
+    tfPrecioCompra.setText(textoVacio);
+    tfPrecioVenta.setText(textoVacio);
+    tfPrecioMayoreo.setText(textoVacio);
+    tfCantidad.setText(textoVacio);
+    tfPorcentajeGanancia.setText(textoVacio);
+    tfPorcentajeGananciaMayoreo.setText(textoVacio);
+    tfPzasMayoreo.setText(textoVacio);
+    tfTipoUnidad.setText(textoVacio);
+  }
+
+  /**
+   * Cierra la ventana actual
+   */
+  public void cerrarVentana(){
+    miVentana.close();
+  }
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    try{
+      ArticulosDAO articulosPersistencia = new Articulos();
+      int ultimoId = articulosPersistencia.recuperarELUltimoIdInsertado() + 1;
+      tfCodigo.setText(Integer.toString(ultimoId));
+    }catch (SQLException | IOException | ClassNotFoundException excepcion){
+      VentanasEmergentes.mostrarVentanaError("Ocurrio un error al conectarse a la base de datos");
+      cerrarVentana();
+    }
+  }
 
+  public void setMiVentana(Stage miVentana){
+    this.miVentana = miVentana;
+  }
+
+  public void setPersistenciaArticulos(ArticulosDAO persistenciaArticulos){
+    this.persistenciaArticulos = persistenciaArticulos;
   }
 }

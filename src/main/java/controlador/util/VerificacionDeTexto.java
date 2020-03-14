@@ -81,7 +81,7 @@ public class VerificacionDeTexto {
    */
   public static boolean esUnaUnidadDeArticuloValida(String unidad){
     final int CANTIDAD_MAXIMA_DE_CARACTERES = 50;
-    return (unidad.length() <= CANTIDAD_MAXIMA_DE_CARACTERES);
+    return (unidad.length() > 0 && unidad.length() <= CANTIDAD_MAXIMA_DE_CARACTERES);
   }
 
 }
