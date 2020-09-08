@@ -1,12 +1,14 @@
 package org.chinosoft.controlador;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import org.chinosoft.App;
 import org.chinosoft.modelo.Articulo;
@@ -267,9 +269,7 @@ public class AgregarArticuloController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
 
     /**
      * Calcula el precio de venta a partir del precio de compra y el porcentaje de ganancia publico
@@ -331,6 +331,49 @@ public class AgregarArticuloController implements Initializable {
         }
     }
 
+    /**
+     * Cambia a la scena de menu de articulos
+     */
+    public void mostrarScenaMenuArticulos(){
+        if(ventanaPrincipal != null){
+            try {
+                ventanaPrincipal.vistaMenuArticulos();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error y no se puede regresar a " +
+                        "la pantalla anterior");
+            }
+        }
+    }
+
+    /**
+     * Coloca en blanco todos los campos
+     */
+    public void limpiarCampos(){
+        tfCodigo.setText("");
+        tfCodigoBarras.setText("");
+        tfNombre.setText("");
+        tfUnidad.setText("");
+        tfPrecioCompra.setText("");
+        tfPrecioVenta.setText("");
+        tfPrecioMayoreo.setText("");
+        tfPzasMayoreo.setText("");
+        tfGananciaPublico.setText("");
+        tfGananciaMayoreo.setText("");
+        tfCantidad.setText("");
+    }
+
+    /**
+     * Muestra en las etiquetas de usuario el nombre y apellido del usuario y la fecha
+     *
+     * @param usuario El usuario logeado
+     */
+    public void mostrarInformacionPrincipal(Usuario usuario, Label lUsuario, Label lFecha) {
+        if (usuario != null) {
+            lUsuario.setText(usuario.getPersona().getNombre() + " " + usuario.getPersona().getApellidos());
+            lFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        }
+    }
+    
     public App getVentanaPrincipal() {
         return ventanaPrincipal;
     }
@@ -339,11 +382,8 @@ public class AgregarArticuloController implements Initializable {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 
-    public Usuario getUsuarioLogeado() {
-        return usuarioLogeado;
-    }
-
     public void setUsuarioLogeado(Usuario usuarioLogeado) {
+        mostrarInformacionPrincipal(usuarioLogeado, lUsuario, lFecha);
         this.usuarioLogeado = usuarioLogeado;
     }
 }
