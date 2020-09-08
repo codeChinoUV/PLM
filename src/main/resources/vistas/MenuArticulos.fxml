@@ -1,107 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0" prefHeight="732.0"
-      prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;"
-      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.chinosoft.controlador.MenuArticulosController">
+
+<Pane maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0" prefHeight="732.0" prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chinosoft.controlador.MenuArticulosController">
     <padding>
-        <Insets top="10.0"/>
+        <Insets top="10.0" />
     </padding>
     <Pane layoutX="-4.0" prefHeight="182.0" prefWidth="1372.0" style="-fx-background-color: #61B2C5;">
-        <ImageView fitHeight="224.0" fitWidth="260.0" layoutX="76.0" layoutY="-22.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <Image url="@../img/logo.png"/>
+        <ImageView fitHeight="224.0" fitWidth="260.0" layoutX="76.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../img/logo.png" />
         </ImageView>
-        <Label alignment="CENTER" layoutX="300.0" layoutY="28.0" prefHeight="76.0" prefWidth="241.0" text="Articulos"
-               textFill="WHITE">
+        <Label alignment="CENTER" layoutX="300.0" layoutY="28.0" prefHeight="76.0" prefWidth="241.0" text="Articulos" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="53.0"/>
+                <Font name="System Bold" size="53.0" />
             </font>
         </Label>
         <Label layoutX="927.0" layoutY="106.0" text="Fecha:">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Label>
         <Label layoutX="908.0" layoutY="10.0" text="Usuario:">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="lUsuario" layoutX="1009.0" layoutY="10.0" prefHeight="35.0" prefWidth="349.0"
-               style="-fx-font-weight: italic;" textFill="WHITE">
+        <Label fx:id="lUsuario" layoutX="1009.0" layoutY="10.0" prefHeight="35.0" prefWidth="349.0" style="-fx-font-weight: italic;" textFill="WHITE">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="lFecha" layoutX="1009.0" layoutY="106.0" prefHeight="35.0" prefWidth="349.0"
-               style="-fx-font-weight: italic;" textFill="WHITE">
+        <Label fx:id="lFecha" layoutX="1009.0" layoutY="106.0" prefHeight="35.0" prefWidth="349.0" style="-fx-font-weight: italic;" textFill="WHITE">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="306.0" layoutY="94.0" prefHeight="60.0" prefWidth="94.0" text="La montaña"
-               textFill="WHITE">
+        <Label alignment="CENTER" layoutX="306.0" layoutY="94.0" prefHeight="60.0" prefWidth="94.0" text="La montaña" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="15.0"/>
+                <Font name="System Bold" size="15.0" />
             </font>
         </Label>
     </Pane>
     <GridPane hgap="10.0" layoutX="300.0" layoutY="265.0" prefHeight="389.0" prefWidth="765.0" vgap="10.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="222.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="222.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <JFXButton fx:id="btnNuevo" contentDisplay="TOP" onAction="#cambiarAgregarArticulo" prefHeight="186.0"
-                   prefWidth="260.0" stylesheets="@../styles/principal.css" text="Nuevo articulo"
-                   GridPane.columnIndex="1">
+        <JFXButton fx:id="btnNuevo" contentDisplay="TOP" onAction="#cambiarAgregarArticulo" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Nuevo articulo" GridPane.columnIndex="1">
             <graphic>
                 <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/nuevo_artiuclo.png"/>
+                    <Image url="@../img/nuevo_artiuclo.png" />
                 </ImageView>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnListar" contentDisplay="TOP" onAction="#cambiarListarArticulos" prefHeight="186.0"
-                   prefWidth="260.0" stylesheets="@../styles/principal.css" text="Listar articulos">
+        <JFXButton fx:id="btnListar" contentDisplay="TOP" onAction="#cambiarListarArticulos" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Listar articulos">
             <graphic>
                 <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/listar_articulos.png"/>
+                    <Image url="@../img/listar_articulos.png" />
                 </ImageView>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnFaltantes" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0"
-                   stylesheets="@../styles/principal.css" text="Articulos faltantes" GridPane.rowIndex="1">
+        <JFXButton fx:id="btnFaltantes" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Articulos faltantes" GridPane.columnIndex="2">
             <graphic>
                 <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/sin_existencia.png"/>
+                    <Image url="@../img/sin_existencia.png" />
                 </ImageView>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnEditar" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0"
-                   stylesheets="@../styles/principal.css" text="Editar articulo" GridPane.columnIndex="2">
-            <graphic>
-                <ImageView fx:id="btnCerrarSesion" fitHeight="101.0" fitWidth="101.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../img/editar_articulo.png"/>
-                </ImageView>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnInicio" contentDisplay="TOP" onAction="#cambiarVistaPrincipal" prefHeight="186.0"
-                   prefWidth="260.0" stylesheets="@../styles/principal.css" text="Inicio" GridPane.columnIndex="2"
-                   GridPane.rowIndex="1">
+        <JFXButton fx:id="btnInicio" contentDisplay="TOP" onAction="#cambiarVistaPrincipal" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Inicio" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <graphic>
                 <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/casa.png"/>
+                    <Image url="@../img/casa.png" />
                 </ImageView>
             </graphic>
         </JFXButton>
