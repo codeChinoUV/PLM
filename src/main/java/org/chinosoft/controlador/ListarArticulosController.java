@@ -1,6 +1,5 @@
 package org.chinosoft.controlador;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -22,6 +21,7 @@ import org.chinosoft.modelo.Usuario;
 import org.chinosoft.modelo.persistencia.Articulos;
 import org.chinosoft.modelo.persistencia.ArticulosDAO;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -72,9 +72,6 @@ public class ListarArticulosController implements Initializable {
 
     @FXML
     private JFXTextField tfBuscar;
-
-    @FXML
-    private JFXButton btnVerDetalles;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -187,44 +184,31 @@ public class ListarArticulosController implements Initializable {
      * @param articulo El articulo a ver los detalles
      * @throws IOException Una excepcion por si no se encuentra el articulo
      */
-    private void ventanaDetallesCajero(Articulo articulo) throws IOException {
+    private void mostrarVentanaDetallesArticulo(Articulo articulo, boolean esAdministrador) throws IOException {
         Stage ventana = new Stage();
         ventana.setMaximized(false);
         ventana.setResizable(false);
         Image icon = new Image(String.valueOf(App.class.getResource("/img/articulos.png")));
         ventana.getIcons().add(icon);
         ventana.setIconified(true);
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloCajero.fxml"));
+        FXMLLoader loader;
+        if (esAdministrador) {
+            loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloAdministrador.fxml"));
+        } else {
+            loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloCajero.fxml"));
+        }
         Pane panelDetalles = loader.load();
         Scene escena = new Scene(panelDetalles);
         ventana.setTitle("Detalles articulo");
-        VerDetallesArticuloCajeroController verDetallesArticulo = loader.getController();
-        verDetallesArticulo.setArticuloDetalles(articulo);
-        verDetallesArticulo.setVentana(ventana);
-        ventana.setScene(escena);
-        ventana.show();
-    }
-
-    /**
-     * Muestra la ventana de detalles de un articulo
-     *
-     * @param articulo El articulo a ver los detalles
-     * @throws IOException Una excepcion por si no se encuentra el articulo
-     */
-    private void ventanaDetallesAdministrador(Articulo articulo) throws IOException {
-        Stage ventana = new Stage();
-        ventana.setMaximized(false);
-        ventana.setResizable(false);
-        Image icon = new Image(String.valueOf(App.class.getResource("/img/articulos.png")));
-        ventana.getIcons().add(icon);
-        ventana.setIconified(true);
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloAdministrador.fxml"));
-        Pane panelDetalles = loader.load();
-        Scene escena = new Scene(panelDetalles);
-        ventana.setTitle("Detalles articulo");
-        VerDetallesArticuloAdministradorController verDetallesArticulo = loader.getController();
-        verDetallesArticulo.setArticulo(articulo);
-        verDetallesArticulo.setVentana(ventana);
+        if (esAdministrador) {
+            VerDetallesArticuloAdministradorController verDetallesArticulo = loader.getController();
+            verDetallesArticulo.setArticulo(articulo);
+            verDetallesArticulo.setVentana(ventana);
+        } else {
+            VerDetallesArticuloCajeroController verDetallesArticuloCajero = loader.getController();
+            verDetallesArticuloCajero.setArticuloDetalles(articulo);
+            verDetallesArticuloCajero.setVentana(ventana);
+        }
         ventana.setScene(escena);
         ventana.show();
     }
@@ -236,14 +220,24 @@ public class ListarArticulosController implements Initializable {
     public void mostrarVentanaDetalles() {
         try {
             Articulo articuloSeleccionado = tArticulos.getSelectionModel().getSelectedItem();
-            if (usuario.getTipo().equals("administrador")) {
-                ventanaDetallesAdministrador(articuloSeleccionado);
-            } else {
-                ventanaDetallesCajero(articuloSeleccionado);
-            }
+            mostrarVentanaDetallesArticulo(articuloSeleccionado, usuario.getTipo().equals("administrador"));
         } catch (IOException ex) {
             System.out.println("ListarArticulosController-IOException : mostrarVentanaDetalles ");
             ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Cambia a la scena de menu de articulos
+     */
+    public void mostrarScenaMenuArticulos() {
+        if (ventanaPrincipal != null) {
+            try {
+                ventanaPrincipal.vistaMenuArticulos();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error y no se puede regresar a " +
+                        "la pantalla anterior");
+            }
         }
     }
 

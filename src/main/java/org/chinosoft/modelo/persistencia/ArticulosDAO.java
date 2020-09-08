@@ -5,15 +5,15 @@ import org.chinosoft.modelo.Articulo;
 import java.util.List;
 
 public interface ArticulosDAO {
-  List<Articulo> getArticulos();
+    List<Articulo> getArticulos();
 
-  List<Articulo> buscarArticulos(String nombre);
+    List<Articulo> buscarArticulos(String nombre);
 
-  Articulo recuperarArticulo(String codigoBarras);
+    Articulo recuperarArticulo(String codigoBarras);
 
-  Articulo recuperarArticulo(int codigo);
+    Articulo recuperarArticulo(int codigo);
 
-  int nuevoArticulo(Articulo articulo);
+    int nuevoArticulo(Articulo articulo);
 
-  boolean editarArticulo(int codigo, Articulo articulo);
+    boolean editarArticulo(int codigo, Articulo articulo);
 }

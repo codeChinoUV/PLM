@@ -88,10 +88,10 @@ public class MenuArticulosController implements Initializable {
         }
     }
 
-    public void cambiarAgregarArticulo(){
-        try{
+    public void cambiarAgregarArticulo() {
+        try {
             ventanaPrincipal.vistaAgregarArticulos();
-        }catch (IOException ex){
+        } catch (IOException ex) {
             System.out.println("MenuArticulos-IOException: cambiarAgregarArticulo");
             ex.printStackTrace();
         }

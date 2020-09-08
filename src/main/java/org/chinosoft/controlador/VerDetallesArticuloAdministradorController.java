@@ -59,6 +59,28 @@ public class VerDetallesArticuloAdministradorController implements Initializable
     @FXML
     private JFXTextField tfGananciaPublico;
 
+    static void LimpiarCampos(JFXTextField tfCodigo, JFXTextField tfCodigoBarras, JFXTextField tfPrecioMayoreo, JFXTextField tfCantidad, JFXTextField tfNombre, JFXTextField tfPrecioPublico, JFXTextField tfPzasMayoreo, JFXTextField tfUnidad) {
+        tfCodigo.setText("");
+        tfCodigoBarras.setText("");
+        tfPrecioMayoreo.setText("");
+        tfCantidad.setText("");
+        tfNombre.setText("");
+        tfPrecioPublico.setText("");
+        tfPzasMayoreo.setText("");
+        tfUnidad.setText("");
+    }
+
+    static void ColocarValoresACampos(Articulo articulo, JFXTextField tfCodigo, JFXTextField tfCodigoBarras, JFXTextField tfNombre, JFXTextField tfUnidad, JFXTextField tfCantidad, JFXTextField tfPzasMayoreo, JFXTextField tfPrecioPublico, JFXTextField tfPrecioMayoreo) {
+        tfCodigo.setText(Integer.toString(articulo.getCodigo()));
+        tfCodigoBarras.setText(articulo.getCodigoBarras());
+        tfNombre.setText(articulo.getNombre());
+        tfUnidad.setText(articulo.getUnidad());
+        tfCantidad.setText(Integer.toString(articulo.getCantidad()));
+        tfPzasMayoreo.setText(Integer.toString(articulo.getPiezasParaMayoreo()));
+        tfPrecioPublico.setText("$" + articulo.getPrecioVenta());
+        tfPrecioMayoreo.setText("$" + articulo.getPrecioMayoreo());
+    }
+
     public Articulo getArticulo() {
         return articulo;
     }
@@ -121,14 +143,7 @@ public class VerDetallesArticuloAdministradorController implements Initializable
      */
     @FXML
     void limpiarCampos(ActionEvent event) {
-        tfCodigo.setText("");
-        tfCodigoBarras.setText("");
-        tfPrecioMayoreo.setText("");
-        tfCantidad.setText("");
-        tfNombre.setText("");
-        tfPrecioPublico.setText("");
-        tfPzasMayoreo.setText("");
-        tfUnidad.setText("");
+        LimpiarCampos(tfCodigo, tfCodigoBarras, tfPrecioMayoreo, tfCantidad, tfNombre, tfPrecioPublico, tfPzasMayoreo, tfUnidad);
         tfGananciaPublico.setText("");
         tfGananciaMayoreo.setText("");
         tfPrecioCompra.setText("");
@@ -141,16 +156,8 @@ public class VerDetallesArticuloAdministradorController implements Initializable
      */
     private void llenarCamposArticulo(Articulo articulo) {
         if (articulo != null) {
-            tfCodigo.setText(Integer.toString(articulo.getCodigo()));
-            tfCodigoBarras.setText(articulo.getCodigoBarras());
-            tfNombre.setText(articulo.getNombre());
-            tfUnidad.setText(articulo.getUnidad());
-            tfCantidad.setText(Integer.toString(articulo.getCantidad()));
-            tfPzasMayoreo.setText(Integer.toString(articulo.getPiezasParaMayoreo()));
-            tfPrecioPublico.setText("$" + articulo.getPrecioVenta());
-            tfPrecioMayoreo.setText("$" + articulo.getPrecioMayoreo());
+            ColocarValoresACampos(articulo, tfCodigo, tfCodigoBarras, tfNombre, tfUnidad, tfCantidad, tfPzasMayoreo, tfPrecioPublico, tfPrecioMayoreo);
             tfGananciaMayoreo.setText("%" + articulo.getGananciaMayoreo());
-            System.out.println(articulo.getGananciaMayoreo());
             tfGananciaPublico.setText("%" + articulo.getGananciaPublico());
             tfPrecioCompra.setText("$" + articulo.getPrecioCompra());
         }

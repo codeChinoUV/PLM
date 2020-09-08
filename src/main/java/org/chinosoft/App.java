@@ -2,12 +2,6 @@ package org.chinosoft;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -19,7 +13,6 @@ import org.chinosoft.modelo.Usuario;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
 
 /**
  * JavaFX App
@@ -30,6 +23,9 @@ public class App extends Application {
     private Pane rootPane;
     private Usuario usuarioLogeado = null;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     /**
      * Muestra en las etiquetas de usuario el nombre y apellido del usuario y la fecha
@@ -132,9 +128,10 @@ public class App extends Application {
 
     /**
      * Cambia la vista a AgregarArticulo
+     *
      * @throws IOException Una excepcion si el archivo de la vista no se encuentra
      */
-    public void vistaAgregarArticulos() throws IOException{
+    public void vistaAgregarArticulos() throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/AgregarArticulo.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
@@ -145,10 +142,6 @@ public class App extends Application {
         stagePrincipal.setScene(scene);
         stagePrincipal.show();
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 
     @Override
     public void start(Stage stage) {

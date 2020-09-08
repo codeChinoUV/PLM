@@ -14,43 +14,43 @@
       prefHeight="732.0"
       prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #FFF;"
       xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.chinosoft.controlador.IniciarSesionController">
-   <padding>
-      <Insets top="10.0"/>
-   </padding>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#61b2c559" height="536.0" layoutX="47.0" layoutY="89.0"
-              stroke="#047680" strokeType="INSIDE" strokeWidth="4.0" width="444.0"/>
-   <Label layoutX="223.0" layoutY="130.0" text="Usuario">
-      <font>
-         <Font size="25.0"/>
-      </font>
-   </Label>
-   <Label layoutX="202.0" layoutY="294.0" text="Contraseña">
-      <font>
-         <Font size="25.0"/>
-      </font>
-   </Label>
-   <JFXButton fx:id="btnIniciarSesion" buttonType="RAISED" defaultButton="true" layoutX="189.0" layoutY="516.0"
-              onAction="#iniciarSesion" prefHeight="53.0" prefWidth="160.0" style="-fx-background-color: #047680;"
-              text="Iniciar sesion" textFill="WHITE">
-      <font>
-         <Font size="20.0"/>
-      </font>
-   </JFXButton>
-   <JFXTextField fx:id="tfUsuario" focusColor="WHITE" layoutX="146.0" layoutY="206.0" prefHeight="40.0"
-                 prefWidth="247.0">
-      <font>
-         <Font size="25.0"/>
-      </font>
-   </JFXTextField>
-   <ImageView fitHeight="497.0" fitWidth="607.0" layoutX="716.0" layoutY="109.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../img/logo.png"/>
-   </ImageView>
-   <JFXPasswordField fx:id="tfcontrasena" focusColor="WHITE" layoutX="145.0" layoutY="366.0" prefHeight="40.0"
-                     prefWidth="247.0"/>
-   <Label fx:id="lMensaje" alignment="CENTER" layoutX="58.0" layoutY="445.0" prefHeight="29.0" prefWidth="419.0">
-      <font>
-         <Font size="25.0"/>
-      </font>
-   </Label>
+    <padding>
+        <Insets top="10.0"/>
+    </padding>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#61b2c559" height="536.0" layoutX="47.0" layoutY="89.0"
+               stroke="#047680" strokeType="INSIDE" strokeWidth="4.0" width="444.0"/>
+    <Label layoutX="223.0" layoutY="130.0" text="Usuario">
+        <font>
+            <Font size="25.0"/>
+        </font>
+    </Label>
+    <Label layoutX="202.0" layoutY="294.0" text="Contraseña">
+        <font>
+            <Font size="25.0"/>
+        </font>
+    </Label>
+    <JFXButton fx:id="btnIniciarSesion" buttonType="RAISED" defaultButton="true" layoutX="189.0" layoutY="516.0"
+               onAction="#iniciarSesion" prefHeight="53.0" prefWidth="160.0" style="-fx-background-color: #047680;"
+               text="Iniciar sesion" textFill="WHITE">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </JFXButton>
+    <JFXTextField fx:id="tfUsuario" focusColor="WHITE" layoutX="146.0" layoutY="206.0" prefHeight="40.0"
+                  prefWidth="247.0">
+        <font>
+            <Font size="25.0"/>
+        </font>
+    </JFXTextField>
+    <ImageView fitHeight="497.0" fitWidth="607.0" layoutX="716.0" layoutY="109.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../img/logo.png"/>
+    </ImageView>
+    <JFXPasswordField fx:id="tfcontrasena" focusColor="WHITE" layoutX="145.0" layoutY="366.0" prefHeight="40.0"
+                      prefWidth="247.0"/>
+    <Label fx:id="lMensaje" alignment="CENTER" layoutX="58.0" layoutY="445.0" prefHeight="29.0" prefWidth="419.0">
+        <font>
+            <Font size="25.0"/>
+        </font>
+    </Label>
 </Pane>

@@ -1,7 +1,5 @@
 package org.chinosoft.modelo;
 
-import java.util.List;
-
 public class Usuario {
     private String usuario;
     private String contrasena;
@@ -22,7 +20,7 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public Usuario(){
+    public Usuario() {
 
     }
 

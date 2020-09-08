@@ -94,14 +94,7 @@ public class VerDetallesArticuloCajeroController implements Initializable {
      */
     @FXML
     public void limpiarCampos() {
-        tfCodigo.setText("");
-        tfCodigoBarras.setText("");
-        tfPrecioMayoreo.setText("");
-        tfCantidad.setText("");
-        tfNombre.setText("");
-        tfPrecioPublico.setText("");
-        tfPzasMayoreo.setText("");
-        tfUnidad.setText("");
+        VerDetallesArticuloAdministradorController.LimpiarCampos(tfCodigo, tfCodigoBarras, tfPrecioMayoreo, tfCantidad, tfNombre, tfPrecioPublico, tfPzasMayoreo, tfUnidad);
     }
 
     /**
@@ -128,14 +121,7 @@ public class VerDetallesArticuloCajeroController implements Initializable {
      */
     private void llenarCamposArticulo(Articulo articulo) {
         if (articulo != null) {
-            tfCodigo.setText(Integer.toString(articulo.getCodigo()));
-            tfCodigoBarras.setText(articulo.getCodigoBarras());
-            tfNombre.setText(articulo.getNombre());
-            tfUnidad.setText(articulo.getUnidad());
-            tfCantidad.setText(Integer.toString(articulo.getCantidad()));
-            tfPzasMayoreo.setText(Integer.toString(articulo.getPiezasParaMayoreo()));
-            tfPrecioPublico.setText("$" + articulo.getPrecioVenta());
-            tfPrecioMayoreo.setText("$" + articulo.getPrecioMayoreo());
+            VerDetallesArticuloAdministradorController.ColocarValoresACampos(articulo, tfCodigo, tfCodigoBarras, tfNombre, tfUnidad, tfCantidad, tfPzasMayoreo, tfPrecioPublico, tfPrecioMayoreo);
         }
     }
 }

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0" prefHeight="732.0" prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chinosoft.controlador.MenuArticulosController">
     <padding>
@@ -74,17 +70,10 @@
                 </ImageView>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="btnFaltantes" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Articulos faltantes" GridPane.rowIndex="1">
+        <JFXButton fx:id="btnFaltantes" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Articulos faltantes" GridPane.columnIndex="2">
             <graphic>
                 <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../img/sin_existencia.png" />
-                </ImageView>
-            </graphic>
-        </JFXButton>
-        <JFXButton fx:id="btnEditar" contentDisplay="TOP" prefHeight="186.0" prefWidth="260.0" stylesheets="@../styles/principal.css" text="Editar articulo" GridPane.columnIndex="2">
-            <graphic>
-                <ImageView fx:id="btnCerrarSesion" fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../img/editar_articulo.png" />
                 </ImageView>
             </graphic>
         </JFXButton>
