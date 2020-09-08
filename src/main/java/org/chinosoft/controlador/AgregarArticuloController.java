@@ -14,6 +14,8 @@ import org.chinosoft.modelo.Usuario;
 import org.chinosoft.modelo.persistencia.Articulos;
 import org.chinosoft.modelo.persistencia.ArticulosDAO;
 
+import javax.swing.*;
+
 public class AgregarArticuloController implements Initializable {
 
     App ventanaPrincipal;
@@ -28,15 +30,6 @@ public class AgregarArticuloController implements Initializable {
 
     @FXML
     private JFXTextField tfCantidad;
-
-    @FXML
-    private JFXButton btnGuardar;
-
-    @FXML
-    private JFXButton btnLimpiar;
-
-    @FXML
-    private JFXButton btnRegresar;
 
     @FXML
     private JFXTextField tfCodigo;
@@ -89,10 +82,8 @@ public class AgregarArticuloController implements Initializable {
                     return false;
                 }
             }
-            return true;
-        }else {
-            return true;
         }
+        return true;
     }
 
     /**
@@ -101,9 +92,8 @@ public class AgregarArticuloController implements Initializable {
      * @return Verdaro si la cadena es valida o falso si no
      */
     private boolean validarDouble(String textoValidar){
-        double numeroValidar;
         try{
-            numeroValidar = Double.parseDouble(textoValidar);
+            Double.parseDouble(textoValidar);
             return true;
         }catch (NumberFormatException ex){
             return false;
@@ -116,9 +106,8 @@ public class AgregarArticuloController implements Initializable {
      * @return Verdadero si el texto se puede convertir a entero
      */
     private boolean validarInt(String textoValidar){
-      int numeroValidar;
         try{
-            numeroValidar = Integer.parseInt(textoValidar);
+            Integer.parseInt(textoValidar);
             return true;
         }catch (NumberFormatException ex){
             return false;
@@ -248,6 +237,9 @@ public class AgregarArticuloController implements Initializable {
       }
     }
 
+    /**
+     * Guarda en la base de datos un nuevo articulo con la información de los campos
+     */
     @FXML
     public void guardarArticulo(){
         String codigo = tfCodigo.getText();
@@ -259,22 +251,84 @@ public class AgregarArticuloController implements Initializable {
         String precioMayoreo = tfPrecioMayoreo.getText();
         String gananciaPublico = tfGananciaPublico.getText();
         String gananciaMayoreo = tfGananciaMayoreo.getText();
-        String pzasMayoreo = tfGananciaMayoreo.getText();
+        String pzasMayoreo = tfPzasMayoreo.getText();
         String unidad = tfUnidad.getText();
         if(verificarDatosCorrectos(codigo,codigoBarras,nombre,cantidad,pzasMayoreo,gananciaMayoreo,gananciaPublico,
                 precioVenta, precioMayoreo, precioCompra, unidad)){
             Articulo articuloGuardar = recuperarArticuloDeDatos();
             ArticulosDAO persistenciaArticulos = new Articulos();
-            System.out.println(persistenciaArticulos.nuevoArticulo(articuloGuardar));
-        }else{
-            System.out.println("Debe de llenar todos los  datos");
+            int seGuardo = persistenciaArticulos.nuevoArticulo(articuloGuardar);
+            if(seGuardo > 0){
+                JOptionPane.showMessageDialog(null, "El articulo se guardo correctamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al guardar el articulo");
+            }
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    /**
+     * Calcula el precio de venta a partir del precio de compra y el porcentaje de ganancia publico
+     */
+    public void colocarPrecioPublico(){
+        calcularPrecios(tfGananciaPublico, tfPrecioVenta);
+    }
+
+    /**
+     * Coloca el precio de mayoreo a partir del precio de compra y el porcentaje de ganancia de mayoreo
+     */
+    public void colocarPrecioMayoreo(){
+        calcularPrecios(tfGananciaMayoreo, tfPrecioMayoreo);
+    }
+
+    /**
+     * Calcula el precio de venta a partir del precio de compra y de un porcentaje de ganancia
+     * @param porcentajeGanancia el campo donde contiene el porcentaje de ganancia
+     * @param campoAColocarPrecio el campo en donde se coloca el precio
+     */
+    private void calcularPrecios(JFXTextField porcentajeGanancia, JFXTextField campoAColocarPrecio) {
+        if(validarDouble(tfPrecioCompra.getText()) && validarDouble(porcentajeGanancia.getText())){
+            double precioCompra = Double.parseDouble(tfPrecioCompra.getText());
+            double porcentajeGananciaMayoreo = Double.parseDouble(porcentajeGanancia.getText());
+            double precioMayoreo = (precioCompra  * (porcentajeGananciaMayoreo / 100)) + precioCompra;
+            campoAColocarPrecio.setText(String.valueOf(precioMayoreo));
+        }else{
+            campoAColocarPrecio.setText("0");
+        }
+    }
+
+    /**
+     * Colca el porcentaje de ganancia del precio publico a partir del precio de compra y el precio de venta
+     */
+    public void colocarGananciaPublico(){
+        calcularPorcentajeDeGanancia(tfPrecioVenta, tfGananciaPublico);
+    }
+
+    /**
+     * Coloca el porcentaje de ganancia del precio mayoreo a partir del precio de compra y el precio de mayoreo
+     */
+    public void colocarGananciaMayoreo(){
+        calcularPorcentajeDeGanancia(tfPrecioMayoreo, tfGananciaMayoreo);
+    }
+
+    /**
+     * Calcula el porcentaje de ganancia a partir del precio y del precioCompra
+     * @param campoDelPrecio el campor que contiene el precio
+     * @param campoAColocarPorcentaje el campo en donde se colocara el porcentaje
+     */
+    private void calcularPorcentajeDeGanancia(JFXTextField campoDelPrecio, JFXTextField campoAColocarPorcentaje){
+        if(validarDouble(tfPrecioCompra.getText()) && validarDouble(campoDelPrecio.getText())){
+            double precioCompra = Double.parseDouble(tfPrecioCompra.getText());
+            double precio = Double.parseDouble(campoDelPrecio.getText());
+            double porcentajeGanancia = ((precio - precioCompra) / precioCompra) * 100;
+            campoAColocarPorcentaje.setText(String.valueOf(porcentajeGanancia));
+        }else{
+            campoAColocarPorcentaje.setText("0");
+        }
     }
 
     public App getVentanaPrincipal() {
