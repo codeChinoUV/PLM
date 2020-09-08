@@ -6,7 +6,8 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="492.0" maxWidth="672.0" minHeight="365.0" minWidth="670.0"
       prefHeight="472.0"
       prefWidth="672.0" style="-fx-border-color: #61B2C5; -fx-border-width: 5;"
-      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.chinosoft.controlador.VerDetallesArticuloAdministradorController">
+      xmlns="http://javafx.com/javafx/11.0.1"
+      fx:controller="org.chinosoft.controlador.VerDetallesArticuloAdministradorController">
     <JFXTextField fx:id="tfCodigo" labelFloat="true" layoutX="32.0" layoutY="41.0" onKeyReleased="#buscarProductoCodigo"
                   prefHeight="36.0" prefWidth="130.0" promptText="Codigo" unFocusColor="#61b2c5">
         <font>

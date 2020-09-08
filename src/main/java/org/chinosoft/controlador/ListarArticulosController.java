@@ -192,19 +192,19 @@ public class ListarArticulosController implements Initializable {
         ventana.getIcons().add(icon);
         ventana.setIconified(true);
         FXMLLoader loader;
-        if(esAdministrador){
+        if (esAdministrador) {
             loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloAdministrador.fxml"));
-        }else{
+        } else {
             loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloCajero.fxml"));
         }
         Pane panelDetalles = loader.load();
         Scene escena = new Scene(panelDetalles);
         ventana.setTitle("Detalles articulo");
-        if(esAdministrador){
+        if (esAdministrador) {
             VerDetallesArticuloAdministradorController verDetallesArticulo = loader.getController();
             verDetallesArticulo.setArticulo(articulo);
             verDetallesArticulo.setVentana(ventana);
-        }else{
+        } else {
             VerDetallesArticuloCajeroController verDetallesArticuloCajero = loader.getController();
             verDetallesArticuloCajero.setArticuloDetalles(articulo);
             verDetallesArticuloCajero.setVentana(ventana);
@@ -230,8 +230,8 @@ public class ListarArticulosController implements Initializable {
     /**
      * Cambia a la scena de menu de articulos
      */
-    public void mostrarScenaMenuArticulos(){
-        if(ventanaPrincipal != null){
+    public void mostrarScenaMenuArticulos() {
+        if (ventanaPrincipal != null) {
             try {
                 ventanaPrincipal.vistaMenuArticulos();
             } catch (IOException e) {
