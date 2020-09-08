@@ -1,4 +1,4 @@
-package modelo;
+package org.chinosoft.modelo;
 
 import java.time.LocalDateTime;
 import java.util.List;

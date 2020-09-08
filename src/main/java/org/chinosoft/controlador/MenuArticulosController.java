@@ -1,22 +1,22 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import modelo.Usuario;
-import principal.Programa;
+import org.chinosoft.App;
+import org.chinosoft.modelo.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuVentasController implements Initializable {
+public class MenuArticulosController implements Initializable {
 
     private Usuario usuario = null;
 
-    private Programa ventanaPrincipal = null;
+    private App ventanaPrincipal = null;
 
     @FXML
     private Label lUsuario;
@@ -25,16 +25,16 @@ public class MenuVentasController implements Initializable {
     private Label lFecha;
 
     @FXML
-    private JFXButton btnNuevaVenta;
+    private JFXButton btnNuevo;
 
     @FXML
-    private JFXButton btnCambio;
+    private JFXButton btnListar;
 
     @FXML
-    private JFXButton btnProductoDefectuoso;
+    private JFXButton btnFaltantes;
 
     @FXML
-    private JFXButton btnDevolucion;
+    private JFXButton btnEditar;
 
     @FXML
     private ImageView btnCerrarSesion;
@@ -56,11 +56,11 @@ public class MenuVentasController implements Initializable {
         this.usuario = usuario;
     }
 
-    public Programa getVentanaPrincipal() {
+    public App getVentanaPrincipal() {
         return ventanaPrincipal;
     }
 
-    public void setVentanaPrincipal(Programa ventanaPrincipal) {
+    public void setVentanaPrincipal(App ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 
@@ -76,5 +76,24 @@ public class MenuVentasController implements Initializable {
         }
     }
 
+    /**
+     * Cambia la vista listar articulos
+     */
+    public void cambiarListarArticulos() {
+        try {
+            ventanaPrincipal.vistaListarArticulos();
+        } catch (IOException ex) {
+            System.out.println("MenuArticulos-IOException: cambiarListarArticulos");
+            ex.printStackTrace();
+        }
+    }
 
+    public void cambiarAgregarArticulo(){
+        try{
+            ventanaPrincipal.vistaAgregarArticulos();
+        }catch (IOException ex){
+            System.out.println("MenuArticulos-IOException: cambiarAgregarArticulo");
+            ex.printStackTrace();
+        }
+    }
 }

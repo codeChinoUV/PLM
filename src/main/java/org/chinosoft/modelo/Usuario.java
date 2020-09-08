@@ -1,4 +1,4 @@
-package modelo;
+package org.chinosoft.modelo;
 
 import java.util.List;
 

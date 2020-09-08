@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0"
       prefHeight="732.0" prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;"
-      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controlador.PrincipalController">
+      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.chinosoft.controlador.PrincipalController">
     <padding>
         <Insets top="10.0"/>
     </padding>

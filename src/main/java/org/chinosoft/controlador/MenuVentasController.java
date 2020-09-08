@@ -1,22 +1,22 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import modelo.Usuario;
-import principal.Programa;
+import org.chinosoft.App;
+import org.chinosoft.modelo.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuArticulosController implements Initializable {
+public class MenuVentasController implements Initializable {
 
     private Usuario usuario = null;
 
-    private Programa ventanaPrincipal = null;
+    private App ventanaPrincipal = null;
 
     @FXML
     private Label lUsuario;
@@ -25,16 +25,16 @@ public class MenuArticulosController implements Initializable {
     private Label lFecha;
 
     @FXML
-    private JFXButton btnNuevo;
+    private JFXButton btnNuevaVenta;
 
     @FXML
-    private JFXButton btnListar;
+    private JFXButton btnCambio;
 
     @FXML
-    private JFXButton btnFaltantes;
+    private JFXButton btnProductoDefectuoso;
 
     @FXML
-    private JFXButton btnEditar;
+    private JFXButton btnDevolucion;
 
     @FXML
     private ImageView btnCerrarSesion;
@@ -56,11 +56,11 @@ public class MenuArticulosController implements Initializable {
         this.usuario = usuario;
     }
 
-    public Programa getVentanaPrincipal() {
+    public App VentanaPrincipal() {
         return ventanaPrincipal;
     }
 
-    public void setVentanaPrincipal(Programa ventanaPrincipal) {
+    public void setVentanaPrincipal(App ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 
@@ -76,15 +76,5 @@ public class MenuArticulosController implements Initializable {
         }
     }
 
-    /**
-     * Cambia la vista listar articulos
-     */
-    public void cambiarListarArticulos() {
-        try {
-            ventanaPrincipal.vistaListarArticulos();
-        } catch (IOException ex) {
-            System.out.println("MenuArticulos-IOException: cambiarListarArticulos");
-            ex.printStackTrace();
-        }
-    }
+
 }

@@ -1,20 +1,31 @@
-package principal;
+package org.chinosoft;
 
-import controlador.*;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import modelo.Usuario;
+import org.chinosoft.controlador.*;
+import org.chinosoft.modelo.Usuario;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.IOException;
 
-public class Programa extends Application{
+/**
+ * JavaFX App
+ */
+public class App extends Application {
+
     private Stage stagePrincipal;
     private Pane rootPane;
     private Usuario usuarioLogeado = null;
@@ -38,10 +49,10 @@ public class Programa extends Application{
      * @throws IOException Una excepcion si la ventana no se encuentra
      */
     private void ventanaInicioSesion() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/InicioSesion.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/InicioSesion.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Papeleria la montaña-Iniciar sesion");
+        stagePrincipal.setTitle("Papeleria la monta単a-Iniciar sesion");
         stagePrincipal.setScene(scene);
         IniciarSesionController controller = loader.getController();
         controller.setVentanaPrincipal(this);
@@ -57,10 +68,10 @@ public class Programa extends Application{
     public void ventanaPrincipal(Usuario usuarioLogeado) throws IOException {
         this.usuarioLogeado = usuarioLogeado;
         System.out.println("Recibio el usuario " + usuarioLogeado.getUsuario());
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/Principal.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/Principal.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Papeleria la montaña-Principal");
+        stagePrincipal.setTitle("Papeleria la monta単a-Principal");
         PrincipalController controller = loader.getController();
         controller.setVentanaPrincipal(this);
         controller.setUsuario(this.usuarioLogeado);
@@ -74,10 +85,10 @@ public class Programa extends Application{
      * @throws IOException Una excepcion si la vista no se encuentra
      */
     public void vistaMenuVentas() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/MenuVentas.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/MenuVentas.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Papeleria la montaña-Ventas");
+        stagePrincipal.setTitle("Papeleria la monta単a-Ventas");
         MenuVentasController controller = loader.getController();
         controller.setVentanaPrincipal(this);
         controller.setUsuario(this.usuarioLogeado);
@@ -91,10 +102,10 @@ public class Programa extends Application{
      * @throws IOException Una excepcion si la vista no se encuentra
      */
     public void vistaMenuArticulos() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/MenuArticulos.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/MenuArticulos.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Papeleria la montaña-Articulos");
+        stagePrincipal.setTitle("Papeleria la monta単a-Articulos");
         MenuArticulosController controller = loader.getController();
         controller.setVentanaPrincipal(this);
         controller.setUsuario(this.usuarioLogeado);
@@ -108,10 +119,10 @@ public class Programa extends Application{
      * @throws IOException Una excepcion si la vista no se encuentra
      */
     public void vistaListarArticulos() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/ListarArticulos.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/ListarArticulos.fxml"));
         rootPane = loader.load();
         Scene scene = new Scene(rootPane);
-        stagePrincipal.setTitle("Papeleria la montaña-Articulos-Listar");
+        stagePrincipal.setTitle("Papeleria la monta単a-Articulos-Listar");
         ListarArticulosController controller = loader.getController();
         controller.setVentanaPrincipal(this);
         controller.setUsuario(this.usuarioLogeado);
@@ -119,6 +130,21 @@ public class Programa extends Application{
         stagePrincipal.show();
     }
 
+    /**
+     * Cambia la vista a AgregarArticulo
+     * @throws IOException Una excepcion si el archivo de la vista no se encuentra
+     */
+    public void vistaAgregarArticulos() throws IOException{
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/AgregarArticulo.fxml"));
+        rootPane = loader.load();
+        Scene scene = new Scene(rootPane);
+        stagePrincipal.setTitle("Papeleria la montaña - Agregar articulo");
+        AgregarArticuloController controller = loader.getController();
+        controller.setUsuarioLogeado(usuarioLogeado);
+        controller.setVentanaPrincipal(this);
+        stagePrincipal.setScene(scene);
+        stagePrincipal.show();
+    }
     public static void main(String[] args) {
         launch(args);
     }
@@ -129,7 +155,7 @@ public class Programa extends Application{
         this.stagePrincipal = stage;
         stagePrincipal.setMaximized(true);
         stagePrincipal.setResizable(false);
-        Image icon = new Image(String.valueOf(Programa.class.getResource("/img/logo.png")));
+        Image icon = new Image(String.valueOf(App.class.getResource("/img/logo.png")));
         stagePrincipal.getIcons().add(icon);
         stagePrincipal.setIconified(true);
         try {

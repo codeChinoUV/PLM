@@ -1,24 +1,24 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import modelo.Articulo;
-import modelo.persistencia.Articulos;
-import modelo.persistencia.ArticulosDAO;
+import org.chinosoft.modelo.Articulo;
+import org.chinosoft.modelo.persistencia.Articulos;
+import org.chinosoft.modelo.persistencia.ArticulosDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class VerDetallesArticuloAdministradorController implements Initializable {
-
-    private Articulo articulo = null;
+public class VerDetallesArticuloCajeroController implements Initializable {
+    private Articulo articuloDetalles = null;
 
     private Stage ventana = null;
+
+    @FXML
+    private JFXTextField tfUnidad;
 
     @FXML
     private JFXTextField tfCodigo;
@@ -44,28 +44,28 @@ public class VerDetallesArticuloAdministradorController implements Initializable
     @FXML
     private JFXButton btnCerrar;
 
-    @FXML
-    private JFXTextField tfUnidad;
-
-    @FXML
-    private JFXButton btnLimpiar;
-
-    @FXML
-    private JFXTextField tfGananciaMayoreo;
-
-    @FXML
-    private JFXTextField tfPrecioCompra;
-
-    @FXML
-    private JFXTextField tfGananciaPublico;
-
-    public Articulo getArticulo() {
-        return articulo;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
-        llenarCamposArticulo(articulo);
+
+    /**
+     * Cierra la ventana actual
+     */
+    @FXML
+    public void cerrarVentana() {
+        if (ventana != null) {
+            ventana.close();
+        }
+    }
+
+    public Articulo getArticuloDetalles() {
+        return articuloDetalles;
+    }
+
+    void setArticuloDetalles(Articulo articuloDetalles) {
+        this.articuloDetalles = articuloDetalles;
+        llenarCamposArticulo(articuloDetalles);
     }
 
     public Stage getVentana() {
@@ -77,10 +77,38 @@ public class VerDetallesArticuloAdministradorController implements Initializable
     }
 
     /**
+     * Recupera el texto ingresado en el tf codigo de barras, recupera al articulo con ese codigo de barras y lo
+     * muestra
+     */
+    @FXML
+    public void buscarProductoCodigoBarras() {
+        ArticulosDAO persistenciaArticulos = new Articulos();
+        if (!tfCodigoBarras.getText().equals("")) {
+            Articulo articuloRecuperado = persistenciaArticulos.recuperarArticulo(tfCodigoBarras.getText());
+            llenarCamposArticulo(articuloRecuperado);
+        }
+    }
+
+    /**
+     * Limpia los textfield
+     */
+    @FXML
+    public void limpiarCampos() {
+        tfCodigo.setText("");
+        tfCodigoBarras.setText("");
+        tfPrecioMayoreo.setText("");
+        tfCantidad.setText("");
+        tfNombre.setText("");
+        tfPrecioPublico.setText("");
+        tfPzasMayoreo.setText("");
+        tfUnidad.setText("");
+    }
+
+    /**
      * Recupera el texto ingresado en el tf codigo, recupera al articulo con ese codigo y lo muestra
      */
     @FXML
-    void buscarProductoCodigo(KeyEvent event) {
+    public void buscarProductoCodigo() {
         ArticulosDAO persistenciaArticulos = new Articulos();
         if (tfCodigo != null && !tfCodigo.getText().equals("")) {
             try {
@@ -91,47 +119,6 @@ public class VerDetallesArticuloAdministradorController implements Initializable
                 tfCodigo.setText("");
             }
         }
-    }
-
-    /**
-     * Recupera el texto ingresado en el tf codigo de barras, recupera al articulo con ese codigo de barras y lo
-     * muestra
-     */
-    @FXML
-    void buscarProductoCodigoBarras(KeyEvent event) {
-        ArticulosDAO persistenciaArticulos = new Articulos();
-        if (!tfCodigoBarras.getText().equals("")) {
-            Articulo articuloRecuperado = persistenciaArticulos.recuperarArticulo(tfCodigoBarras.getText());
-            llenarCamposArticulo(articuloRecuperado);
-        }
-    }
-
-    /**
-     * Cierra la ventana actual
-     */
-    @FXML
-    void cerrarVentana(ActionEvent event) {
-        if (ventana != null) {
-            ventana.close();
-        }
-    }
-
-    /**
-     * Limpia los textfield
-     */
-    @FXML
-    void limpiarCampos(ActionEvent event) {
-        tfCodigo.setText("");
-        tfCodigoBarras.setText("");
-        tfPrecioMayoreo.setText("");
-        tfCantidad.setText("");
-        tfNombre.setText("");
-        tfPrecioPublico.setText("");
-        tfPzasMayoreo.setText("");
-        tfUnidad.setText("");
-        tfGananciaPublico.setText("");
-        tfGananciaMayoreo.setText("");
-        tfPrecioCompra.setText("");
     }
 
     /**
@@ -149,15 +136,6 @@ public class VerDetallesArticuloAdministradorController implements Initializable
             tfPzasMayoreo.setText(Integer.toString(articulo.getPiezasParaMayoreo()));
             tfPrecioPublico.setText("$" + articulo.getPrecioVenta());
             tfPrecioMayoreo.setText("$" + articulo.getPrecioMayoreo());
-            tfGananciaMayoreo.setText("%" + articulo.getGananciaMayoreo());
-            System.out.println(articulo.getGananciaMayoreo());
-            tfGananciaPublico.setText("%" + articulo.getGananciaPublico());
-            tfPrecioCompra.setText("$" + articulo.getPrecioCompra());
         }
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
-
 }

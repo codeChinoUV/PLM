@@ -1,4 +1,4 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -7,18 +7,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import modelo.Usuario;
-import modelo.persistencia.UsuarioDAO;
-import modelo.persistencia.Usuarios;
-import principal.Programa;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import org.chinosoft.App;
+import org.chinosoft.modelo.Usuario;
+import org.chinosoft.modelo.persistencia.UsuarioDAO;
+import org.chinosoft.modelo.persistencia.Usuarios;
 
 public class IniciarSesionController implements Initializable {
 
-  private Programa ventanaPrincipal = null;
+  private App ventanaPrincipal = null;
 
   @FXML
   private JFXButton btnIniciarSesion;
@@ -111,11 +110,11 @@ public class IniciarSesionController implements Initializable {
     }
   }
 
-  public Programa getVentanaPrincipal() {
+  public App getVentanaPrincipal() {
     return ventanaPrincipal;
   }
 
-  public void setVentanaPrincipal(Programa ventanaPrincipal) {
+  public void setVentanaPrincipal(App ventanaPrincipal) {
     this.ventanaPrincipal = ventanaPrincipal;
   }
 }

@@ -1,4 +1,4 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -16,11 +16,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import modelo.Articulo;
-import modelo.Usuario;
-import modelo.persistencia.Articulos;
-import modelo.persistencia.ArticulosDAO;
-import principal.Programa;
+import org.chinosoft.App;
+import org.chinosoft.modelo.Articulo;
+import org.chinosoft.modelo.Usuario;
+import org.chinosoft.modelo.persistencia.Articulos;
+import org.chinosoft.modelo.persistencia.ArticulosDAO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +31,7 @@ public class ListarArticulosController implements Initializable {
 
     private Usuario usuario = null;
 
-    private Programa ventanaPrincipal = null;
+    private App ventanaPrincipal = null;
 
     private List<Articulo> articulos = null;
 
@@ -191,10 +191,10 @@ public class ListarArticulosController implements Initializable {
         Stage ventana = new Stage();
         ventana.setMaximized(false);
         ventana.setResizable(false);
-        Image icon = new Image(String.valueOf(Programa.class.getResource("/img/articulos.png")));
+        Image icon = new Image(String.valueOf(App.class.getResource("/img/articulos.png")));
         ventana.getIcons().add(icon);
         ventana.setIconified(true);
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/VerDetallesArticuloCajero.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloCajero.fxml"));
         Pane panelDetalles = loader.load();
         Scene escena = new Scene(panelDetalles);
         ventana.setTitle("Detalles articulo");
@@ -215,10 +215,10 @@ public class ListarArticulosController implements Initializable {
         Stage ventana = new Stage();
         ventana.setMaximized(false);
         ventana.setResizable(false);
-        Image icon = new Image(String.valueOf(Programa.class.getResource("/img/articulos.png")));
+        Image icon = new Image(String.valueOf(App.class.getResource("/img/articulos.png")));
         ventana.getIcons().add(icon);
         ventana.setIconified(true);
-        FXMLLoader loader = new FXMLLoader(Programa.class.getResource("/vistas/VerDetallesArticuloAdministrador.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/vistas/VerDetallesArticuloAdministrador.fxml"));
         Pane panelDetalles = loader.load();
         Scene escena = new Scene(panelDetalles);
         ventana.setTitle("Detalles articulo");
@@ -256,7 +256,7 @@ public class ListarArticulosController implements Initializable {
         this.usuario = usuario;
     }
 
-    public void setVentanaPrincipal(Programa ventanaPrincipal) {
+    public void setVentanaPrincipal(App ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 }

@@ -1,12 +1,12 @@
-package controlador;
+package org.chinosoft.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import modelo.Usuario;
-import principal.Programa;
+import org.chinosoft.App;
+import org.chinosoft.modelo.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +17,7 @@ public class PrincipalController implements Initializable {
 
     private Usuario usuario = null;
 
-    private Programa ventanaPrincipal = null;
+    private App ventanaPrincipal = null;
 
     @FXML
     private Label lUsuario;
@@ -86,11 +86,11 @@ public class PrincipalController implements Initializable {
     }
 
 
-    public Programa getVentanaPrincipal() {
+    public App getVentanaPrincipal() {
         return ventanaPrincipal;
     }
 
-    public void setVentanaPrincipal(Programa ventanaPrincipal) {
+    public void setVentanaPrincipal(App ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
 

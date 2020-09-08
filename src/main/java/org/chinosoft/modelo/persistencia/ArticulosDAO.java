@@ -1,6 +1,6 @@
-package modelo.persistencia;
+package org.chinosoft.modelo.persistencia;
 
-import modelo.Articulo;
+import org.chinosoft.modelo.Articulo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface ArticulosDAO {
 
   Articulo recuperarArticulo(int codigo);
 
-  boolean nuevoArticulo(Articulo articulo);
+  int nuevoArticulo(Articulo articulo);
 
   boolean editarArticulo(int codigo, Articulo articulo);
 }

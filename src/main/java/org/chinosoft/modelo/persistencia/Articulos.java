@@ -1,11 +1,9 @@
-package modelo.persistencia;
+package org.chinosoft.modelo.persistencia;
 
-import modelo.Articulo;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.chinosoft.modelo.Articulo;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Articulos implements ArticulosDAO {
 
   private final String CONSULTA_TODOS_LOS_ARTICULOS = "SELECT * FROM articulos";
   private final String CONSULTA_BUSCAR_ARTICULOS = "SELECT * FROM articulos WHERE nombre RLIKE ";
-  private final String AGREGAR_ARTICULO = "INSERT INTO articulo(codigoDeBarras, nombre, cantidad, piezasParaMayoreo, " +
+  private final String AGREGAR_ARTICULO = "INSERT INTO articulos(codigoDeBarras, nombre, cantidad, piezasParaMayoreo, " +
           "gananciaMayoreo, gananciaPublico, precioVenta, precioMayoreo, precioCompra, estado, unidad) VALUES(";
   private final String EDITAR_ARTICULO = "UPDATE articulos SET codigoDeBarras=";
   private final String CONSULTA_RECUPERAR_ARTICULO_POR_CODIGO = "SELECT * FROM articulos WHERE codigo =";
@@ -145,7 +143,7 @@ public class Articulos implements ArticulosDAO {
    * @param articulo El articulo que se almacenara
    * @return El objeto almacecnado con el su codigo o null si ocurrio un error
    */
-  public boolean nuevoArticulo(Articulo articulo) {
+  public int nuevoArticulo(Articulo articulo) {
     if (articulo != null) {
       String query = AGREGAR_ARTICULO + "'" + articulo.getCodigoBarras() + "','" + articulo.getNombre() + "',"
               + articulo.getCantidad() + "," + articulo.getPiezasParaMayoreo() + "," + articulo.getGananciaMayoreo()
@@ -156,17 +154,22 @@ public class Articulos implements ArticulosDAO {
       if (conexion != null) {
         try {
           consulta = conexion.createStatement();
-          return consulta.execute(query);
-        } catch (SQLException ex) {
+          consulta.execute(query);
+          return 1;
+        } catch (SQLIntegrityConstraintViolationException no){
+            System.out.println("Articulos-SQLIntegrityConstraintViolationException: nuevoArticulo");
+            no.printStackTrace();
+            return 0;
+        }catch (SQLException ex) {
           ex.printStackTrace();
           System.out.println("Articulos-SQLException: nuevoArticulo");
-          return false;
+          return -1;
         }
       }else {
-        return false;
+        return -1;
       }
     } else {
-      return false;
+      return -1;
     }
   }
 

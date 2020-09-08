@@ -1,6 +1,6 @@
-package modelo.persistencia;
+package org.chinosoft.modelo.persistencia;
 
-import modelo.Usuario;
+import org.chinosoft.modelo.Usuario;
 
 import java.util.List;
 

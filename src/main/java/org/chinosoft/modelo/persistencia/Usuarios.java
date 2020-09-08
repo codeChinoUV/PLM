@@ -1,6 +1,7 @@
-package modelo.persistencia;
-import modelo.Persona;
-import modelo.Usuario;
+package org.chinosoft.modelo.persistencia;
+
+import org.chinosoft.modelo.Persona;
+import org.chinosoft.modelo.Usuario;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

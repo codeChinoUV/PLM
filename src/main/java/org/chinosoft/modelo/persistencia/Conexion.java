@@ -1,4 +1,4 @@
-package modelo.persistencia;
+package org.chinosoft.modelo.persistencia;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
@@ -25,8 +25,8 @@ public class Conexion {
   private static Connection conexion;
   private static String host = "localhost";
   private static String db = "PLM";
-  private static String username = "miguel";
-  private static String password = "joseMiguel13";
+  private static String username = "PLM";
+  private static String password = "hola9011";
   private static String url = "jdbc:mysql://" + host + "/" + db + "?useLegacyDatetimeCode=false&serverTimezone=America/Mexico_City";
 
 

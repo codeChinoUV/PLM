@@ -1,4 +1,4 @@
-package modelo;
+package org.chinosoft.modelo;
 
 public class DetalleVenta {
   private int id;
