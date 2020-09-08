@@ -1,96 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0" prefHeight="732.0"
-      prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;"
-      xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.chinosoft.controlador.ListarArticulosController">
+
+<Pane maxHeight="732.0" maxWidth="1366.0" minHeight="732.0" minWidth="1366.0" prefHeight="732.0" prefWidth="1366.0" snapToPixel="false" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chinosoft.controlador.ListarArticulosController">
     <padding>
-        <Insets top="10.0"/>
+        <Insets top="10.0" />
     </padding>
     <Pane layoutX="-4.0" prefHeight="182.0" prefWidth="1372.0" style="-fx-background-color: #61B2C5;">
-        <ImageView fitHeight="224.0" fitWidth="260.0" layoutX="76.0" layoutY="-22.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <Image url="@../img/logo.png"/>
+        <ImageView fitHeight="224.0" fitWidth="260.0" layoutX="76.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../img/logo.png" />
         </ImageView>
-        <Label alignment="CENTER" layoutX="288.0" layoutY="28.0" prefHeight="76.0" prefWidth="331.0"
-               text="Articulos-listar" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="288.0" layoutY="28.0" prefHeight="76.0" prefWidth="215.0" text="Articulos" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="39.0"/>
+                <Font name="System Bold" size="39.0" />
             </font>
         </Label>
         <Label layoutX="927.0" layoutY="106.0" text="Fecha:">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Label>
         <Label layoutX="908.0" layoutY="10.0" text="Usuario:">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="lUsuario" layoutX="1009.0" layoutY="10.0" prefHeight="35.0" prefWidth="349.0"
-               style="-fx-font-weight: italic;" textFill="WHITE">
+        <Label fx:id="lUsuario" layoutX="1009.0" layoutY="10.0" prefHeight="35.0" prefWidth="349.0" style="-fx-font-weight: italic;" textFill="WHITE">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="lFecha" layoutX="1009.0" layoutY="106.0" prefHeight="35.0" prefWidth="349.0"
-               style="-fx-font-weight: italic;" textFill="WHITE">
+        <Label fx:id="lFecha" layoutX="1009.0" layoutY="106.0" prefHeight="35.0" prefWidth="349.0" style="-fx-font-weight: italic;" textFill="WHITE">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="311.0" layoutY="94.0" prefHeight="60.0" prefWidth="159.0"
-               text="Papeleria y jugeteria" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="311.0" layoutY="94.0" prefHeight="60.0" prefWidth="159.0" text="Papeleria y jugeteria" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="15.0"/>
+                <Font name="System Bold" size="15.0" />
             </font>
         </Label>
     </Pane>
     <TableView fx:id="tArticulos" layoutX="94.0" layoutY="260.0" prefHeight="389.0" prefWidth="1179.0">
         <columns>
-            <TableColumn fx:id="tcCodigo" editable="false" prefWidth="118.0" sortable="false" text="Codigo"/>
-            <TableColumn fx:id="tcCodigoBarras" editable="false" prefWidth="175.0" sortable="false"
-                         text="Codigo de barras"/>
-            <TableColumn fx:id="tcNombre" editable="false" prefWidth="340.0" text="Nombre"/>
-            <TableColumn fx:id="tcPrecioPublico" editable="false" prefWidth="134.0" sortable="false"
-                         text="Precio publico"/>
-            <TableColumn fx:id="tcPrecioMayoreo" editable="false" prefWidth="113.0" sortable="false"
-                         text="Precio mayoreo"/>
-            <TableColumn fx:id="tcCantidad" editable="false" prefWidth="73.0" sortable="false" text="Cantidad"/>
-            <TableColumn fx:id="tcUnidad" editable="false" prefWidth="104.0" sortable="false" text="Unidad"/>
-            <TableColumn fx:id="tcPzaMayoreo" editable="false" prefWidth="120.0" sortable="false" text="Pzas. Mayoreo"/>
+            <TableColumn fx:id="tcCodigo" editable="false" prefWidth="118.0" sortable="false" text="Codigo" />
+            <TableColumn fx:id="tcCodigoBarras" editable="false" prefWidth="175.0" sortable="false" text="Codigo de barras" />
+            <TableColumn fx:id="tcNombre" editable="false" prefWidth="340.0" text="Nombre" />
+            <TableColumn fx:id="tcPrecioPublico" editable="false" prefWidth="134.0" sortable="false" text="Precio publico" />
+            <TableColumn fx:id="tcPrecioMayoreo" editable="false" prefWidth="113.0" sortable="false" text="Precio mayoreo" />
+            <TableColumn fx:id="tcCantidad" editable="false" prefWidth="73.0" sortable="false" text="Cantidad" />
+            <TableColumn fx:id="tcUnidad" editable="false" prefWidth="104.0" sortable="false" text="Unidad" />
+            <TableColumn fx:id="tcPzaMayoreo" editable="false" prefWidth="120.0" sortable="false" text="Pzas. Mayoreo" />
         </columns>
     </TableView>
     <Label layoutX="94.0" layoutY="203.0" text="Buscar:">
         <font>
-            <Font size="24.0"/>
+            <Font size="24.0" />
         </font>
     </Label>
-    <JFXTextField fx:id="tfBuscar" focusColor="#61b2c5" layoutX="192.0" layoutY="199.0"
-                  onKeyReleased="#llenarTablaConBusqueda" prefHeight="43.0" prefWidth="447.0">
+    <JFXTextField fx:id="tfBuscar" focusColor="#61b2c5" layoutX="192.0" layoutY="199.0" onKeyReleased="#llenarTablaConBusqueda" prefHeight="43.0" prefWidth="447.0">
         <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
         </font>
     </JFXTextField>
-    <JFXButton fx:id="btnVerDetalles" layoutX="1127.0" layoutY="199.0" onAction="#mostrarVentanaDetalles"
-               prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #047680;" text="Ver detalles"
-               textFill="WHITE">
+    <JFXButton fx:id="btnVerDetalles" layoutX="1127.0" layoutY="199.0" onAction="#mostrarVentanaDetalles" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #047680;" text="Ver detalles" textFill="WHITE">
         <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
         </font>
     </JFXButton>
-    <JFXButton fx:id="btnRegresar" layoutX="1127.0" layoutY="665.0" onAction="#mostrarScenaMenuArticulos"
-               prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: red;" text="Regresar" textFill="WHITE">
+    <JFXButton fx:id="btnRegresar" layoutX="1127.0" layoutY="665.0" onAction="#mostrarScenaMenuArticulos" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: red;" text="Regresar" textFill="WHITE">
         <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
         </font>
     </JFXButton>
 </Pane>
